@@ -11,15 +11,21 @@ public:
     vector<Aresta *> arestas;
     int numV;
     int numA;
+    vector<vector<int>> mCusto;
+    vector<vector<int>> mRoteamento;
     vector<string> vertices;
 
     Grafo();
     ~Grafo();
 
     static Grafo *criarGrafo(int vertices, int arestas, const vector<Aresta *> &novasArestas);
-    vector<vector<int>> algoritmoFloyd();
+    void algoritmoFloyd();
     vector<vector<int>> matrizCusto();
-    Aresta *retornarArestaAdjacente(string vOrigem, string vDestino);
+    vector<vector<int>> matrizRoteamento();
+    Aresta *retornarArestaAdjacente(int vOrigem, int vDestino);
+
+    bool verificarMatriz(int alvo, vector<vector<int>> matriz);
+
 
 private:
 

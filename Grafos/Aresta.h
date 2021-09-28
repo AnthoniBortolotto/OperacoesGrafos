@@ -10,11 +10,11 @@ class Aresta
 {
 public:
 
-    Aresta(int peso, string origem, string destino);
+    Aresta(int peso, int origem, int destino);
     ~Aresta();
     int peso;
-    string origem;
-    string destino;
+    int origem;
+    int destino;
     /*Aresta();*/
 
 private:

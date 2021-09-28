@@ -1,21 +1,34 @@
 
 #include <iostream>
 #include <vector>
-#include "Grafo.h"
 #include "Aresta.h"
+#include "Grafo.h"
 
 using namespace std;
 
+void exibirMatriz(vector<vector<int>> matriz) {
+	for (int i = 0; i < matriz.size(); i++)
+	{
+		for (int j = 0; j < matriz[i].size(); j++)
+		{
+			cout << matriz[i][j] << " ";
+		}
+		cout << "\n";
+	}
+}
+
 int main()
 {
-    auto* a1 = new Aresta(1, "v1", "v2");
-    auto* a2 = new Aresta(4, "v2", "v3");
-    auto* a3 = new Aresta(2, "v2", "v3");
-    auto* a4 = new Aresta(2, "v1", "v3");
-    auto* a5 = new Aresta(1, "v3", "v4");
+    auto* a1 = new Aresta(1, 1, 2);
+    auto* a2 = new Aresta(4, 2, 3);
+    auto* a3 = new Aresta(2, 2, 3);
+    auto* a4 = new Aresta(2, 1, 3);
+    auto* a5 = new Aresta(1, 3, 4);
 
-    Grafo::criarGrafo(4,5, {a1,a2,a3,a4,a5});
-
+	auto* grafo = new Grafo();
+	grafo = grafo->criarGrafo(4, 5, {a1, a2, a3, a4, a5});
+   // criarGrafo(4,5, {a1,a2,a3,a4,a5});
+	grafo->algoritmoFloyd();
 	int input;
 	bool continuar = true;
 	while (continuar)
@@ -25,7 +38,10 @@ int main()
 		switch (input)
 		{
 		case 1:
-            ;
+			cout << "matriz de custo" << endl;
+			exibirMatriz(grafo->mCusto);
+			cout << "\nmatriz de roteamento\n";
+			exibirMatriz(grafo->mRoteamento);
 			break;
 		case 2:
 			break;
