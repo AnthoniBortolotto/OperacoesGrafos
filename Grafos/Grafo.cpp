@@ -8,12 +8,11 @@ Grafo::Grafo()
 }
 
 Grafo::~Grafo()
-{
-}
+= default;
 
-Grafo* Grafo::criarGrafo(int vertices, int arestas, vector<Aresta> novasArestas)
+Grafo* Grafo::criarGrafo(int vertices, int arestas, const vector<Aresta *>& novasArestas)
 {
-    Grafo* grafo = new Grafo();
+    auto* grafo = new Grafo();
 
     grafo->numV = vertices;
     grafo->numA = arestas;
@@ -25,12 +24,32 @@ Grafo* Grafo::criarGrafo(int vertices, int arestas, vector<Aresta> novasArestas)
 
 vector<vector<int>> Grafo::algoritmoFloyd()
 {
-    return vector<vector<int>>();
+    //return matrizCusto();
 }
 
 vector<vector<int>> Grafo::matrizCusto()
 {
-    return vector<vector<int>>();
+    vector<vector<int>> matriz = {};
+    for (int i = 0; i < matriz.size(); i++) {
+        for (int j = 0; j < matriz[i].size(); j++) {
+            if(i == j)
+                matriz[i][j] = 0;
+            else
+            {
+                matriz[i][j] = retornarArestaAdjacente(arestas[i]->origem, arestas[j]->destino)->peso;
+                cout << arestas[i]->origem;
+            }
+        }
+    }
+}
+
+Aresta *Grafo::retornarArestaAdjacente(string vOrigem, string vDestino) {
+    Aresta* aCerta = nullptr;
+    for (int i = 0; i < this->arestas.size(); i++) {
+        if(this->arestas[i]->origem == vOrigem && this->arestas[i]->destino == vDestino)
+            aCerta = this->arestas[i];
+    }
+    return aCerta;
 }
 
 

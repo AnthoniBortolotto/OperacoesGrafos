@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/OperacoesGrafos.dir/Grafos/Aresta.cpp.o CMakeFiles/OperacoesGrafos.dir/Grafos/Grafo.cpp.o CMakeFiles/OperacoesGrafos.dir/Grafos/main.cpp.o -o OperacoesGrafos 

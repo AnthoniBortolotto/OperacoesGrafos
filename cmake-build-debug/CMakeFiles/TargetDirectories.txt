@@ -1,0 +1,3 @@
+/home/felipe/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/felipe/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/felipe/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir
