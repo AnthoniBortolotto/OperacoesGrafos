@@ -57,7 +57,7 @@ void Grafo::algoritmoFloyd()
 		{
 			for (int j = 0; j < tempMCusto[i].size(); j++)
 			{
-				if (tempMCusto[i][k] != -1 && tempMCusto[k][j] != -1 && ((tempMCusto[i][k] + tempMCusto[k][j]) < tempMCusto[i][j]) || tempMCusto[i][j] == -1) {
+				if ((tempMCusto[i][k] != -1 && tempMCusto[k][j] != -1) && (((tempMCusto[i][k] + tempMCusto[k][j]) < tempMCusto[i][j]) || tempMCusto[i][j] == -1)) {
 					tempMCusto[i][j] = tempMCusto[i][k] + tempMCusto[k][j];
 					tempMRoteamento[i][j] = tempMRoteamento[i][k];
 				}
