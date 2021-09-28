@@ -25,11 +25,30 @@ Grafo* Grafo::criarGrafo(int vertices, int arestas, const vector<Aresta*>&novasA
 void Grafo::algoritmoFloyd()
 {
 	auto tempMCusto = this->matrizCusto();
+	cout << "matriz de custo" << endl;
+	for (int i = 0; i < tempMCusto.size(); i++)
+	{
+		for (int j = 0; j < tempMCusto[i].size(); j++)
+		{
+			cout << tempMCusto[i][j] << " ";
+		}
+		cout << "\n";
+	}
 	auto tempMRoteamento = this->matrizRoteamento();
+	cout << "\nmatriz de roteamento\n";
+	for (int i = 0; i < tempMRoteamento.size(); i++)
+	{
+		for (int j = 0; j < tempMRoteamento[i].size(); j++)
+		{
+			cout << tempMRoteamento[i][j] << " ";
+		}
+		cout << "\n";
+	}
+
 	int k = 0;
 	//  vector<vector<vector<int>>> matrizes;
 	 // matrizes.push_back(mCusto);
-	while (this->verificarMatriz(NULL, tempMCusto) || k >= tempMCusto.size()) {
+	while (this->verificarMatriz(NULL, tempMCusto) && k < tempMCusto.size()) {
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
 			for (int j = 0; j < tempMCusto[i].size(); j++)
@@ -57,7 +76,7 @@ vector<vector<int>> Grafo::matrizCusto()
 				matriz[i][j] = 0;
 			else
 			{
-				auto aAdjascente = retornarArestaAdjacente(arestas[i]->origem, arestas[j]->destino);
+				auto aAdjascente = retornarArestaAdjacente(i, j);
 				if (aAdjascente != NULL) matriz[i][j] = aAdjascente->peso;
 				else matriz[i][j] = NULL;
 				//cout << arestas[i]->origem;
@@ -77,7 +96,7 @@ vector<vector<int>> Grafo::matrizRoteamento()
 				matriz[i][j] = i+1;
 			else
 			{
-				auto aAdjascente = retornarArestaAdjacente(arestas[i]->origem, arestas[j]->destino);
+				auto aAdjascente = retornarArestaAdjacente(i+1, j+1);
 				if (aAdjascente != NULL) matriz[i][j] = aAdjascente->destino;
 				else matriz[i][j] = 0;
 			}

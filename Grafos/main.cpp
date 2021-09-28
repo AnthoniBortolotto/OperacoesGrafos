@@ -19,14 +19,21 @@ void exibirMatriz(vector<vector<int>> matriz) {
 
 int main()
 {
-    auto* a1 = new Aresta(1, 1, 2);
-    auto* a2 = new Aresta(4, 2, 3);
-    auto* a3 = new Aresta(2, 2, 3);
-    auto* a4 = new Aresta(2, 1, 3);
-    auto* a5 = new Aresta(1, 3, 4);
+    auto* a1 = new Aresta(5, 1, 2);
+    auto* a2 = new Aresta(1, 4, 1);
+    auto* a3 = new Aresta(3, 1, 4);
+
+    auto* a4 = new Aresta(1, 4, 2);
+    auto* a5 = new Aresta(1, 5, 2);
+	auto* a6 = new Aresta(3, 2, 3);
+
+	auto* a7 = new Aresta(5, 3, 5);
+
+	auto* a8 = new Aresta(1, 4, 5);
+	auto* a9 = new Aresta(1, 5, 4);
 
 	auto* grafo = new Grafo();
-	grafo = grafo->criarGrafo(4, 5, {a1, a2, a3, a4, a5});
+	grafo = grafo->criarGrafo(5, 9, {a1, a2, a3, a4, a5, a6, a7, a8, a9});
    // criarGrafo(4,5, {a1,a2,a3,a4,a5});
 	grafo->algoritmoFloyd();
 	int input;
