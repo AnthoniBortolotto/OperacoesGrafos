@@ -25,35 +25,39 @@ Grafo* Grafo::criarGrafo(int vertices, int arestas, const vector<Aresta*>&novasA
 void Grafo::algoritmoFloyd()
 {
 	auto tempMCusto = this->matrizCusto();
-	cout << "matriz de custo" << endl;
-	for (int i = 0; i < tempMCusto.size(); i++)
-	{
-		for (int j = 0; j < tempMCusto[i].size(); j++)
-		{
-			cout << tempMCusto[i][j] << " ";
-		}
-		cout << "\n";
-	}
 	auto tempMRoteamento = this->matrizRoteamento();
-	cout << "\nmatriz de roteamento\n";
-	for (int i = 0; i < tempMRoteamento.size(); i++)
-	{
-		for (int j = 0; j < tempMRoteamento[i].size(); j++)
-		{
-			cout << tempMRoteamento[i][j] << " ";
-		}
-		cout << "\n";
-	}
+	
+
 
 	int k = 0;
 	//  vector<vector<vector<int>>> matrizes;
 	 // matrizes.push_back(mCusto);
-	while (this->verificarMatriz(NULL, tempMCusto) && k < tempMCusto.size()) {
+	while (this->verificarMatriz(-1, tempMCusto) && k < tempMCusto.size()) {
+		cout << "matriz de custo: " << k << endl;
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
 			for (int j = 0; j < tempMCusto[i].size(); j++)
 			{
-				if (tempMCusto[i][k] != NULL && tempMCusto[k][j] != NULL && (tempMCusto[i][k] + tempMCusto[k][j]) < tempMCusto[i][j]) {
+				cout << tempMCusto[i][j] << " ";
+			}
+			cout << "\n";
+		}
+		cout << "\nmatriz de roteamento: " << k << "\n";
+		for (int i = 0; i < tempMRoteamento.size(); i++)
+		{
+			for (int j = 0; j < tempMRoteamento[i].size(); j++)
+			{
+				cout << tempMRoteamento[i][j] << " ";
+			}
+			cout << "\n";
+		}
+		//EXIBIÇÃO DE DADOS
+
+		for (int i = 0; i < tempMCusto.size(); i++)
+		{
+			for (int j = 0; j < tempMCusto[i].size(); j++)
+			{
+				if (tempMCusto[i][k] != -1 && tempMCusto[k][j] != -1 && ((tempMCusto[i][k] + tempMCusto[k][j]) < tempMCusto[i][j]) || tempMCusto[i][j] == -1) {
 					tempMCusto[i][j] = tempMCusto[i][k] + tempMCusto[k][j];
 					tempMRoteamento[i][j] = tempMRoteamento[i][k];
 				}
@@ -68,7 +72,7 @@ void Grafo::algoritmoFloyd()
 
 vector<vector<int>> Grafo::matrizCusto()
 {
-	vector<int> colunas(this->numV, 0);
+	vector<int> colunas(this->numV, -1);
 	vector<vector<int>> matriz(this->numV, colunas);
 	for (int i = 0; i < matriz.size(); i++) {
 		for (int j = 0; j < matriz[i].size(); j++) {
@@ -76,9 +80,9 @@ vector<vector<int>> Grafo::matrizCusto()
 				matriz[i][j] = 0;
 			else
 			{
-				auto aAdjascente = retornarArestaAdjacente(i, j);
+				auto aAdjascente = retornarArestaAdjacente(i+1, j+1);
 				if (aAdjascente != NULL) matriz[i][j] = aAdjascente->peso;
-				else matriz[i][j] = NULL;
+				else matriz[i][j] = -1;
 				//cout << arestas[i]->origem;
 			}
 		}
@@ -106,12 +110,11 @@ vector<vector<int>> Grafo::matrizRoteamento()
 }
 
 Aresta* Grafo::retornarArestaAdjacente(int vOrigem, int vDestino) {
-	Aresta* aCerta = NULL;
 	for (int i = 0; i < this->arestas.size(); i++) {
 		if (this->arestas[i]->origem == vOrigem && this->arestas[i]->destino == vDestino)
-			aCerta = this->arestas[i];
+			return this->arestas[i];
 	}
-	return aCerta;
+	return NULL;
 }
 
 bool Grafo::verificarMatriz(int alvo, vector<vector<int>> matriz) {
