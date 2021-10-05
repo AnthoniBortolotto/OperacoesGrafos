@@ -7,7 +7,7 @@
 using namespace std;
 
 void exibirMatriz(const vector<vector<int>>& matriz) {
-	for (auto & i : matriz)
+	for (auto & i : matriz) //pq Mattes? Quem entende essa porra?
 	{
 		for (int j : i)
 		{
@@ -19,18 +19,19 @@ void exibirMatriz(const vector<vector<int>>& matriz) {
 
 int main()
 {
-    auto* a1 = new Aresta(5, 1, 2);
-    auto* a2 = new Aresta(1, 4, 1);
-    auto* a3 = new Aresta(3, 1, 4);
+	auto* a1 = new Aresta(5, 0, 1);
+	auto* a2 = new Aresta(1, 3, 0);
+	auto* a3 = new Aresta(3, 0, 3);
 
-    auto* a4 = new Aresta(1, 4, 2);
-    auto* a5 = new Aresta(1, 5, 2);
-	auto* a6 = new Aresta(3, 2, 3);
+	auto* a4 = new Aresta(1, 3, 1);
+	auto* a5 = new Aresta(1, 4, 1);
+	auto* a6 = new Aresta(3, 1, 2);
 
-	auto* a7 = new Aresta(5, 3, 5);
+	auto* a7 = new Aresta(5, 2, 4);
 
-	auto* a8 = new Aresta(1, 4, 5);
-	auto* a9 = new Aresta(1, 5, 4);
+	auto* a8 = new Aresta(1, 3, 4);
+	auto* a9 = new Aresta(1, 4, 3);
+
 
 	Grafo* grafo;
 	grafo = Grafo::criarGrafo(5, 9, {a1, a2, a3, a4, a5, a6, a7, a8, a9});
@@ -39,29 +40,29 @@ int main()
 	bool continuar = true;
 	while (continuar)
 	{
-		cout << "Menu - Problema do Carteiro Chines\n 1- Matriz de Custo\n 2- Matriz de Roteamento\n 3- Resolução\n 4-sair\n";
+		cout << "Menu - Problema do Carteiro Chines\n 1- Matriz de Custo\n 2- Matriz de Roteamento\n 3- Floyd\n 4-Dijkstra\n5-Sair\n";
 		cin >> input;
 		switch (input)
 		{
 		case 1:
-            system("clear");
+            //system("clear");
 			cout << " -- Matriz de Custo --" << endl;
 			exibirMatriz(grafo->mCusto);
 			break;
 		case 2:
-            system("clear");
+            //system("clear");
             cout << " -- Matriz de Roteamento --" << endl;
             exibirMatriz(grafo->mRoteamento);
 			break;
 		case 3:
-            system("clear");
+            //system("clear");
             grafo->algoritmoFloyd();
 			break;
 		case 4:
-            cout << grafo->dijkstra(0, 1);
+            grafo->dijkstra(0, 2);
             //exit(0);
 		case 5:
-            system("clear");
+            //system("clear");
 			continuar = false;
 			break;
 		default:

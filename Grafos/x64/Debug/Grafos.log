@@ -1,5 +1,9 @@
 ﻿  Aresta.cpp
   Grafo.cpp
+D:\C\Grafos\Grafos\Grafo.h(35,32): warning C4305: 'inicializando': truncamento de '__int64' para 'unsigned long'
+D:\C\Grafos\Grafos\Grafo.h(35,34): warning C4309: 'inicializando': truncamento de valor constante
   main.cpp
+D:\C\Grafos\Grafos\Grafo.h(35,32): warning C4305: 'inicializando': truncamento de '__int64' para 'unsigned long'
+D:\C\Grafos\Grafos\Grafo.h(35,34): warning C4309: 'inicializando': truncamento de valor constante
   Gerando Código...
-  Grafos.vcxproj -> C:\Users\antho\source\repos\OperacoesGrafos\x64\Debug\Grafos.exe
+  Grafos.vcxproj -> D:\C\Grafos\x64\Debug\Grafos.exe

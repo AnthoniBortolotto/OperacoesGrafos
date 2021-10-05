@@ -29,7 +29,7 @@ public:
 
     //Dijsktra
     int menorDistancia(vector<int> dist, vector<int> visitados);
-    int dijkstra(int vOrigem, int vDestino);
+    vector<int> dijkstra(int vOrigem, int vDestino);
 
     bool procurar(vector<int> visitados, int valor);
     unsigned long int INFINITO = 100000000000000000;
