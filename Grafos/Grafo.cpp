@@ -133,41 +133,47 @@ bool Grafo::verificarMatriz(int alvo, vector<vector<int>> matriz) {
     return false;
 }
 
-int Grafo::dijkstra(int vOrigem, int vDestino) {
-//    int
-//    vector<int> dist(this->numV, -1); // Cria vetor de distancias com todo valor como -1
-//    dist[vOrigem] = 0; // seta a distancia da origem para 0
-    vector<int> visitados; // cria um vetor para guardar os vertices visitados
-    int indiceMenorDist = -1;
-    if(vOrigem == vDestino) return  0;
-
-//    for (int k = 0; k < this->numV; k++) { //Iterando todos os vertices
-//        indiceMenorDist = menorDistancia(dist, visitados); //pega o indice com a menor distancia
-//        for(int i = 0; i < this->numV; i++)
-//        {
-//            for(int j = 0; j < this->numA; j++){
-//                if(this->arestas[0]->peso == dist[indiceMenorDist]
-//                && this->arestas[1]->peso == dist[i])
-//                {
-//                    if(this->arestas[2]->peso != -1 and !this->procurar(visitados, i) and dist[i] > dist[indiceMenorDist]+arestas[2]->peso)
-//                    {
-//                        dist[i] = dist[indiceMenorDist]+arestas[2]->peso;
-//                    }
-//                }
-//            }
-//        }
-//        visitados.push_back(indiceMenorDist);
-//    }
-    return dist[vDestino];
+int Grafo::dijkstra(int vOrigem, int vDestino) 
+{
+    int menor = -1;
+    //Descobrir o que é ant
+    vector<int> visitados, ant(this->numV, -1), distancias(this->numV, -1);
+    distancias[vOrigem] = 0; // a distância da origem até ela própria é 0
+    for (int i = 0; i < this->numV; i++)
+    {
+        menor = this->menorDistancia(distancias, visitados);
+        if (menor == -1) break; //melhorar mais tarde
+        visitados.push_back(i);
+        auto aVizinhas = this->arestasVizinhas(menor);
+        for (int j = 0; j < aVizinhas.size(); j++)
+        {
+            //descobrir qual dado das arestas vizinhas se quer
+            int indice = aVizinhas[j]->destino; //chance de dar ruim alta aqui
+            if (distancias[indice] == -1) 
+            {
+                distancias[indice] = distancias[menor] + aVizinhas[j]->peso;
+                ant[indice] = menor;
+            }
+            else
+            {
+                if (distancias[indice] > (distancias[menor] + aVizinhas[j]->peso)) 
+                {
+                    distancias[indice] = distancias[menor] + aVizinhas[j]->peso;
+                    ant[indice] = menor;
+                }
+            }
+        }
+    }
+    return distancias[vDestino];
 }
 
 int Grafo::menorDistancia(vector<int> dist, vector<int> visitados)
 {
-    int distanciaMin = -1;
+    int distanciaMenor = -1;
     int indice = -1;
     for (int i = 0; i < this->numV; ++i) {
-        if(distanciaMin == -1 || (dist[i] < distanciaMin && this->procurar(visitados, this->vertices[i]))){
-            distanciaMin = dist[i];
+        if(distanciaMenor == -1 || (dist[i] < distanciaMenor && !this->procurar(visitados, this->vertices[i]))){
+            distanciaMenor = dist[i];
             indice = i;
         }
     }
@@ -178,8 +184,11 @@ int Grafo::menorDistancia(vector<int> dist, vector<int> visitados)
 
 bool Grafo::procurar(vector<int> visitados, int valor) {
 
-    auto retorno = std::find(begin(visitados), end(visitados), valor);
-    return retorno != std::end(visitados);
+    for (int i = 0; i < visitados.size(); i++)
+    {
+        if (visitados[i] == valor) return true;
+    }
+    return false;
 }
 
 vector<Aresta *> Grafo::arestasVizinhas(int vertice) {
