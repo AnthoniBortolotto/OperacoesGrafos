@@ -30,12 +30,11 @@ public:
     //Dijsktra
     int menorDistancia(vector<int> dist, vector<int> visitados);
     vector<int> dijkstra(int vOrigem, int vDestino, int &distTotal);
-
+    vector<int> fleury(int vOrigem);
     bool procurar(vector<int> visitados, int valor);
-    unsigned long int INFINITO = 100000000000000000;
 
     vector<Aresta *>  arestasVizinhas(int vertice);
-
+    bool eEuleriano();
 private:
 
 

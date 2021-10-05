@@ -182,6 +182,11 @@ vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int &distTotal)
 	return ordem;
 }
 
+vector<int> Grafo::fleury(int vOrigem)
+{
+	return vector<int>();
+}
+
 int Grafo::menorDistancia(vector<int> dist, vector<int> visitados)
 {
 	int indiceDistMenor = -1;
@@ -211,4 +216,16 @@ vector<Aresta*> Grafo::arestasVizinhas(int vertice) {
 			vizinhos.push_back(this->arestas[i]);
 	}
 	return vizinhos;
+}
+
+bool Grafo::eEuleriano()
+{
+	int numVerticesImpares = 0;
+	int numArestas;
+	for (int i = 0; i < this->numV; i++) {
+		numArestas = this->arestasVizinhas(i).size();
+		if (numArestas % 2 != 0) numVerticesImpares++;
+	}
+	if (numVerticesImpares == 0 || numVerticesImpares == 2) return true;
+	return false;
 }

@@ -61,7 +61,7 @@ int main()
 	vector<int> res = grafo->dijkstra(origem, destino, dist);
 	while (continuar)
 	{
-		cout << "Menu - Problema do Carteiro Chines\n 1- Matriz de Custo\n 2- Matriz de Roteamento\n 3- Floyd\n 4-Dijkstra\n5-Sair\n";
+		cout << "Menu - Problema do Carteiro Chines\n 1- Matriz de Custo\n 2- Matriz de Roteamento\n 3- Floyd\n 4-Dijkstra\n 5-Sair\n";
 		cin >> input;
 		switch (input)
 		{
