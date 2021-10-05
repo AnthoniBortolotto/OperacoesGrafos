@@ -17,6 +17,23 @@ void exibirMatriz(const vector<vector<int>>& matriz) {
 	}
 }
 
+void exibirDijkstra(vector<int> djikstra, int vOrigem, int vDestino, int DistTotal) {
+	vector<int> ordem;
+	int i = vDestino;
+	while (true) {
+		ordem.push_back(djikstra[i]); 
+		i = ordem[ordem.size() - 1];
+		if (i == vOrigem) break; //trocar depois
+	}
+	cout << "Peso total: " << DistTotal << endl;
+	cout << "Sequencia:\n";
+	for (i = ordem.size() - 1; i >= 0; i--)
+	{
+		cout << ordem[i] << "-";
+	}
+	cout << vDestino << endl;
+}
+
 int main()
 {
 	auto* a1 = new Aresta(5, 0, 1);
@@ -38,6 +55,10 @@ int main()
 
 	int input;
 	bool continuar = true;
+	int origem = 0;
+	int destino = 2;
+	int dist = 0;
+	vector<int> res = grafo->dijkstra(origem, destino, dist);
 	while (continuar)
 	{
 		cout << "Menu - Problema do Carteiro Chines\n 1- Matriz de Custo\n 2- Matriz de Roteamento\n 3- Floyd\n 4-Dijkstra\n5-Sair\n";
@@ -59,7 +80,7 @@ int main()
             grafo->algoritmoFloyd();
 			break;
 		case 4:
-            grafo->dijkstra(0, 2);
+			exibirDijkstra(res, origem, destino, dist);
             //exit(0);
 		case 5:
             //system("clear");

@@ -133,13 +133,13 @@ bool Grafo::verificarMatriz(int alvo, vector<vector<int>> matriz) {
 	return false;
 }
 
-vector<int> Grafo::dijkstra(int vOrigem, int vDestino)
+vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int &distTotal)
 {
 	int menor = -1;
 	//Ant é a ordem em que os vértices são visitados
 	vector<int> visitados(this->numV, 0), ordem(this->numV, -1), distancias(this->numV, -1);
 	distancias[vOrigem] = 0;
-	ordem[vOrigem] = vOrigem;// a distância da origem até ela própria é 0
+	ordem[vOrigem] = -2;// a distância da origem até ela própria é 0
 	for (int cont = 0; cont < this->numV; cont++)
 	{
 		menor = this->menorDistancia(distancias, visitados); //começar teste com i = 1
@@ -165,19 +165,20 @@ vector<int> Grafo::dijkstra(int vOrigem, int vDestino)
 			}
 		}
 	}
-	//exibir matriz
-	cout << "vetor de distancias\n";
-	for (int i = 0; i < distancias.size(); i++)
-	{
-		cout << distancias[i] << " ";
+	////exibir matriz
+	//cout << "vetor de distancias\n";
+	//for (int i = 0; i < distancias.size(); i++)
+	//{
+	//	cout << distancias[i] << " ";
 
-	}
-	cout << "\nordem de percorrer\n";
-	for (int i = 0; i < ordem.size(); i++)
-	{
-		cout << ordem[i] << " ";
+	//}
+	//cout << "\nordem de percorrer\n";
+	//for (int i = 0; i < ordem.size(); i++)
+	//{
+	//	cout << ordem[i] << " ";
 
-	}
+	//}
+	distTotal = distancias[vDestino];
 	return ordem;
 }
 
