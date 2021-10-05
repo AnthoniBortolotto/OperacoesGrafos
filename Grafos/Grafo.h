@@ -13,7 +13,7 @@ public:
     int numA;
     vector<vector<int>> mCusto;
     vector<vector<int>> mRoteamento;
-    vector<string> vertices;
+    vector<int> vertices;
 
     Grafo();
     ~Grafo();
@@ -26,6 +26,15 @@ public:
 
     bool verificarMatriz(int alvo, vector<vector<int>> matriz);
 
+
+    //Dijsktra
+    int menorDistancia(vector<int> dist, vector<int> visitados);
+    int dijkstra(int vOrigem, int vDestino);
+
+    bool procurar(vector<int> visitados, int valor);
+    unsigned long int INFINITO = 100000000000000000;
+
+    vector<Aresta *>  arestasVizinhas(int vertice);
 
 private:
 

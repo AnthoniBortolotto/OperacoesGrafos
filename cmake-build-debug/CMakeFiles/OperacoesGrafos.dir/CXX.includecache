@@ -19,6 +19,12 @@ Grafo.h
 /home/felipe/Git/OperacoesGrafos/Grafos/Grafo.h
 Aresta.h
 /home/felipe/Git/OperacoesGrafos/Grafos/Aresta.h
+list
+-
+queue
+-
+algorithm
+-
 
 /home/felipe/Git/OperacoesGrafos/Grafos/Grafo.h
 vector
@@ -27,14 +33,4 @@ Aresta.h
 /home/felipe/Git/OperacoesGrafos/Grafos/Aresta.h
 string
 /home/felipe/Git/OperacoesGrafos/Grafos/string
-
-/home/felipe/Git/OperacoesGrafos/Grafos/main.cpp
-iostream
--
-vector
--
-Grafo.h
-/home/felipe/Git/OperacoesGrafos/Grafos/Grafo.h
-Aresta.h
-/home/felipe/Git/OperacoesGrafos/Grafos/Aresta.h
 

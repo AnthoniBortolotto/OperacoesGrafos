@@ -6,12 +6,12 @@
 
 using namespace std;
 
-void exibirMatriz(vector<vector<int>> matriz) {
-	for (int i = 0; i < matriz.size(); i++)
+void exibirMatriz(const vector<vector<int>>& matriz) {
+	for (auto & i : matriz)
 	{
-		for (int j = 0; j < matriz[i].size(); j++)
+		for (int j : i)
 		{
-			cout << matriz[i][j] << " ";
+			cout << j << " ";
 		}
 		cout << "\n";
 	}
@@ -32,31 +32,36 @@ int main()
 	auto* a8 = new Aresta(1, 4, 5);
 	auto* a9 = new Aresta(1, 5, 4);
 
-	auto* grafo = new Grafo();
-	grafo = grafo->criarGrafo(5, 9, {a1, a2, a3, a4, a5, a6, a7, a8, a9});
-   // criarGrafo(4,5, {a1,a2,a3,a4,a5});
-	grafo->algoritmoFloyd();
+	Grafo* grafo;
+	grafo = Grafo::criarGrafo(5, 9, {a1, a2, a3, a4, a5, a6, a7, a8, a9});
+
 	int input;
 	bool continuar = true;
 	while (continuar)
 	{
-		cout << "Menu\n 1- Problema do carteiro chines\n5-sair\n";
+		cout << "Menu - Problema do Carteiro Chines\n 1- Matriz de Custo\n 2- Matriz de Roteamento\n 3- Resolução\n 4-sair\n";
 		cin >> input;
 		switch (input)
 		{
 		case 1:
-			cout << "matriz de custo" << endl;
+            system("clear");
+			cout << " -- Matriz de Custo --" << endl;
 			exibirMatriz(grafo->mCusto);
-			cout << "\nmatriz de roteamento\n";
-			exibirMatriz(grafo->mRoteamento);
 			break;
 		case 2:
+            system("clear");
+            cout << " -- Matriz de Roteamento --" << endl;
+            exibirMatriz(grafo->mRoteamento);
 			break;
 		case 3:
+            system("clear");
+            grafo->algoritmoFloyd();
 			break;
 		case 4:
-			break;
+            cout << grafo->dijkstra(0, 1);
+            //exit(0);
 		case 5:
+            system("clear");
 			continuar = false;
 			break;
 		default:
@@ -66,3 +71,22 @@ int main()
 	
     return 0;
 }
+
+/*
+ * algoritmo de fleury
+    função Fleury(G = (V,E): grafo) : caminho
+       G' := G     { G' = (V', E')}
+       v0 := um vértice de G'
+       C := [v0] {Inicialmente, o circuito contém só v0}
+       Enquanto E' não vazio
+           vi := último vértice de C
+           Se vi tem só uma aresta incidente;
+               ai := a aresta incidente a vi em G'
+           Senão
+               ai := uma aresta incidente a vi em G' e que não é uma ponte
+           Retirar a aresta ai do grafo G'
+           Acrescentar ai no final de C
+           vj := vértice ligado a vi por ai
+           Acrescentar vj no final de C
+       Retornar C
+ */
