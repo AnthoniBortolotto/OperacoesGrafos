@@ -53,15 +53,21 @@ int main()
 	Grafo* grafo;
 	grafo = Grafo::criarGrafo(5, 9, {a1, a2, a3, a4, a5, a6, a7, a8, a9});
 
-	int input;
+	int input  = 0;
 	bool continuar = true;
 	int origem = 0;
 	int destino = 2;
 	int dist = 0;
-	vector<int> res = grafo->dijkstra(origem, destino, dist);
+	//vector<int> res = grafo->dijkstra(origem, destino, dist);
+//	grafo->proximaArestaEValida(4, a5);
 	while (continuar)
 	{
-		cout << "Menu - Problema do Carteiro Chines\n 1- Matriz de Custo\n 2- Matriz de Roteamento\n 3- Floyd\n 4-Dijkstra\n 5-Sair\n";
+		cout << "Menu - Problema do Carteiro Chines\n";
+		cout << "1 - Matriz de Custo\n";
+		cout << "2 - Matriz de Roteamento\n";
+		cout << "3 - Floyd\n";
+		cout << "4 - Dijkstra";
+		cout << "\n5 - Sair\n";
 		cin >> input;
 		switch (input)
 		{
@@ -80,7 +86,7 @@ int main()
             grafo->algoritmoFloyd();
 			break;
 		case 4:
-			exibirDijkstra(res, origem, destino, dist);
+			//exibirDijkstra(res, origem, destino, dist);
             //exit(0);
 		case 5:
             //system("clear");

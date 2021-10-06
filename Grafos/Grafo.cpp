@@ -218,6 +218,23 @@ vector<Aresta*> Grafo::arestasVizinhas(int vertice) {
 	return vizinhos;
 }
 
+vector<int> Grafo::verticesVizinhos(int vertice)
+{
+	auto aVizinhas = this->arestasVizinhas(vertice);
+	vector<int> vVizinhos;
+	bool adicionar;
+	for (int i = 0; i < aVizinhas.size(); i++)
+	{
+		adicionar = true;
+		for (int j = 0; j < vVizinhos.size(); j++)
+		{
+			if (vVizinhos[j] == aVizinhas[i]->destino) adicionar = false;
+		}
+		if (adicionar) vVizinhos.push_back(aVizinhas[i]->destino);
+	}
+	return vVizinhos;
+}
+
 bool Grafo::eEuleriano()
 {
 	int numVerticesImpares = 0;
@@ -228,4 +245,32 @@ bool Grafo::eEuleriano()
 	}
 	if (numVerticesImpares == 0 || numVerticesImpares == 2) return true;
 	return false;
+}
+
+bool Grafo::proximaArestaEValida(int vertice, Aresta* caminho)
+{
+	auto arestasVizinhas = this->arestasVizinhas(vertice);
+	//se há apenas uma direção então ela é válida
+	if (arestasVizinhas.size() == 1) return true;
+	//checar se é ponte
+	//auto numVAlcancaveis = this->verticesVizinhos(vertice); //ver se não é djikstra
+	auto numvAlcancaveisAntes = this->numVAlcancaveis(vertice);
+	//remover a aresta caminho das arestas
+	//remove qualquer aresta igual a caminho 
+	this->arestas.erase(std::remove(this->arestas.begin(), this->arestas.end(), caminho), this->arestas.end()); //funciona
+	auto numvAlcancaveisDepois = this->numVAlcancaveis(vertice);
+	this->arestas.push_back(caminho);
+	if (numvAlcancaveisAntes > numvAlcancaveisDepois) return false;
+	return true;
+}
+
+int Grafo::numVAlcancaveis(int origem)
+{
+	int cont = 0;
+	this->algoritmoFloyd();
+	for (int i = 0; i < this->mCusto[origem].size(); i++)
+	{
+		if (this->mCusto[origem][i] != -1) cont++;
+	}
+	return cont;
 }
