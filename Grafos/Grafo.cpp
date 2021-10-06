@@ -207,7 +207,26 @@ vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int &distTotal)
 
 vector<int> Grafo::fleury(int vOrigem)
 {
-	return vector<int>();
+	int vAtual = vOrigem;
+	vector<int> res;
+	while (true)
+	{
+		auto aVizinhas = this->arestasVizinhas(vAtual);
+		if (aVizinhas.empty())break;
+		for (int i = 0; i < aVizinhas.size(); i++)
+		{
+			if (this->proximaArestaEValida(vAtual, aVizinhas[i])) {
+				res.push_back(vAtual);
+				vAtual = aVizinhas[i]->destino;
+				//deletar aresta
+				this->arestas.erase(std::remove(this->arestas.begin(), this->arestas.end(), aVizinhas[i]), this->arestas.end());
+				break;
+			}
+		}
+
+	}
+	if (res.empty()) res.push_back(vOrigem);
+	return res;
 }
 
 int Grafo::menorDistancia(vector<int> dist, vector<int> visitados)
@@ -289,6 +308,7 @@ bool Grafo::proximaArestaEValida(int vertice, Aresta* caminho)
 
 int Grafo::numVAlcancaveis(int origem)
 {
+	//jeito com floyd
 	int cont = 0;
 	this->algoritmoFloyd();
 	for (int i = 0; i < this->mCusto[origem].size(); i++)

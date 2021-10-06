@@ -36,7 +36,7 @@ void exibirDijkstra(vector<int> djikstra, int vOrigem, int vDestino, int DistTot
 
 int main()
 {
-	auto* a1 = new Aresta(5, 0, 1);
+	/*auto* a1 = new Aresta(5, 0, 1);
 	auto* a2 = new Aresta(1, 3, 0);
 	auto* a3 = new Aresta(3, 0, 3);
 
@@ -47,11 +47,37 @@ int main()
 	auto* a7 = new Aresta(5, 2, 4);
 
 	auto* a8 = new Aresta(1, 3, 4);
-	auto* a9 = new Aresta(1, 4, 3);
+	auto* a9 = new Aresta(1, 4, 3);*/
 
+	auto* a1 = new Aresta(1, 0, 4);
+	auto* a2 = new Aresta(1, 4, 0);
+
+	auto* a3 = new Aresta(3, 0, 1);
+	auto* a4 = new Aresta(3, 1, 0);
+
+	auto* a5 = new Aresta(4, 0, 2);
+	auto* a6 = new Aresta(4, 2, 0);
+
+	auto* a7 = new Aresta(1, 0, 3);
+	auto* a8 = new Aresta(1, 0, 3);
+
+	
+	auto* a9 = new Aresta(1, 1, 2);
+	auto* a10 = new Aresta(1, 2, 1);
+
+	auto* a11 = new Aresta(4, 1, 3);
+	auto* a12 = new Aresta(4, 3, 1);
+
+
+	auto* a13 = new Aresta(5, 2, 3);
+	auto* a14 = new Aresta(5, 3, 2);
+
+
+	auto* a15 = new Aresta(1, 1, 4);
+	auto* a16 = new Aresta(1, 4, 1);
 
 	Grafo* grafo;
-	grafo = Grafo::criarGrafo(5, 9, {a1, a2, a3, a4, a5, a6, a7, a8, a9});
+	grafo = Grafo::criarGrafo(5, 16, {a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16});
 
 	int input  = 0;
 	bool continuar = true;
@@ -89,6 +115,7 @@ int main()
 			//exibirDijkstra(res, origem, destino, dist);
             //exit(0);
 		case 5:
+			grafo->proximaArestaEValida(4, a5);
             //system("clear");
 			continuar = false;
 			break;
