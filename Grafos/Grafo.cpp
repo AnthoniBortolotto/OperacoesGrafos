@@ -35,8 +35,12 @@ void Grafo::algoritmoFloyd()
 	auto tempMCusto = this->matrizCusto();
 	auto tempMRoteamento = this->matrizRoteamento();
 
+
+
 	int k = 0;
-	while (this->verificarMatriz(-1, tempMCusto) && k < tempMCusto.size()) {
+	//  Exibir dados
+	while (this->verificarMatriz(-1, tempMCusto) && k <= tempMCusto.size()) {
+
 		cout << "matriz de custo: " << k << endl;
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
@@ -55,7 +59,6 @@ void Grafo::algoritmoFloyd()
 			}
 			cout << "\n";
 		}
-		//EXIBIÇÃO DE DADOS
 
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
@@ -70,6 +73,26 @@ void Grafo::algoritmoFloyd()
 
 		k++;
 	}
+	//precisa 2 vezes
+	cout << "matriz de custo: " << k << endl;
+	for (int i = 0; i < tempMCusto.size(); i++)
+	{
+		for (int j = 0; j < tempMCusto[i].size(); j++)
+		{
+			cout << tempMCusto[i][j] << " ";
+		}
+		cout << "\n";
+	}
+	cout << "\nmatriz de roteamento: " << k << "\n";
+	for (int i = 0; i < tempMRoteamento.size(); i++)
+	{
+		for (int j = 0; j < tempMRoteamento[i].size(); j++)
+		{
+			cout << tempMRoteamento[i][j] << " ";
+		}
+		cout << "\n";
+	}
+
 	this->mCusto = tempMCusto;
 	this->mRoteamento = tempMRoteamento;
 }
@@ -84,7 +107,7 @@ vector<vector<int>> Grafo::matrizCusto()
 				matriz[i][j] = 0;
 			else
 			{
-				auto aAdjascente = retornarArestaAdjacente(i + 1, j + 1); //Passa a Vértice de Origem e Vertice Destino para verificar se é adjacente.
+				auto aAdjascente = retornarArestaAdjacente(i, j); //Passa a Vértice de Origem e Vertice Destino para verificar se é adjacente.
 				if (aAdjascente != NULL)  //Se não for adjacente, o valor atual na matriz fica -1, caso contrario, pega o peso.
 					matriz[i][j] = aAdjascente->peso;
 				else
@@ -102,12 +125,12 @@ vector<vector<int>> Grafo::matrizRoteamento()
 	for (int i = 0; i < matriz.size(); i++) {
 		for (int j = 0; j < matriz[i].size(); j++) {
 			if (i == j)
-				matriz[i][j] = i + 1;
+				matriz[i][j] = i;
 			else
 			{
-				auto aAdjascente = retornarArestaAdjacente(i + 1, j + 1);
+				auto aAdjascente = retornarArestaAdjacente(i, j);
 				if (aAdjascente != NULL) matriz[i][j] = aAdjascente->destino;
-				else matriz[i][j] = 0;
+				else matriz[i][j] = -1;
 			}
 		}
 	}
