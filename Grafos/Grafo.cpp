@@ -156,7 +156,7 @@ bool Grafo::verificarMatriz(int alvo, vector<vector<int>> matriz) {
 	return false;
 }
 
-vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int &distTotal)
+vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int& distTotal)
 {
 	int menor = -1;
 	//Ant é a ordem em que os vértices são visitados
@@ -175,7 +175,8 @@ vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int &distTotal)
 			int indice = aVizinhas[j]->destino; //chance de dar ruim alta aqui
 			if (distancias[indice] == -1) //verifica se não existe distância até o vizinho
 			{
-				distancias[indice] = distancias[menor] + aVizinhas[j]->peso;
+				if (distancias[menor] >= 0) distancias[indice] = distancias[menor] + aVizinhas[j]->peso;
+				else distancias[indice] = aVizinhas[j]->peso;
 				ordem[indice] = menor;
 			}
 			else
@@ -254,6 +255,10 @@ bool Grafo::procurar(vector<int> visitados, int valor) {
 vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino)
 {
 	vector<int> ordem;
+	if (vOrigem == vDestino) {
+		ordem.push_back(vOrigem);
+		return ordem;
+	}
 	int i = vDestino;
 	while (true) {
 		ordem.push_back(djikstra[i]);
@@ -265,7 +270,29 @@ vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDes
 	{
 		inverso.push_back(ordem[i]);
 	}
+	inverso.push_back(vDestino);
 	return inverso;
+}
+
+int Grafo::obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino)
+{
+	auto traducao = this->DjikstraTraduzido(djikstra, vOrigem, vDestino);
+	int distancia = 0;
+	if (traducao.size() == 1) return distancia;
+
+	for (int i = 1; i < traducao.size(); i++)
+	{
+		distancia += this->buscarAresta(traducao[i - 1], traducao[i])->peso;
+	}
+	return distancia;
+}
+
+Aresta* Grafo::buscarAresta(int vOrigem, int vDestino)
+{
+	for (auto aresta : this->arestas) {
+		if (aresta->origem == vOrigem && aresta->destino == vDestino) return aresta;
+	}
+	return NULL;
 }
 
 vector<Aresta*> Grafo::arestasVizinhas(int vertice) {
@@ -297,7 +324,7 @@ vector<int> Grafo::verticesVizinhos(int vertice)
 vector<int> Grafo::vImpares()
 {
 	vector<int> vI;
-	for (auto vertice: this->vertices)
+	for (auto vertice : this->vertices)
 	{
 		if ((this->arestasVizinhas(vertice).size() / 2) % 2 != 0) vI.push_back(vertice);
 	}
@@ -316,7 +343,7 @@ bool Grafo::eEuleriano()
 	return false;
 }
 
-bool Grafo::proximaArestaEValida(int vertice, Aresta* caminho)
+bool Grafo::proximaArestaEValida(int vertice, Aresta * caminho)
 {
 	auto arestasVizinhas = this->arestasVizinhas(vertice);
 	//se há apenas uma direção então ela é válida
@@ -343,4 +370,9 @@ int Grafo::numVAlcancaveis(int origem)
 		if (this->mCusto[origem][i] != -1) cont++;
 	}
 	return cont;
+}
+
+Grafo* Grafo::duplicarArestas(int origem)
+{
+	return nullptr;
 }

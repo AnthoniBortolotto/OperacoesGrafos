@@ -33,7 +33,9 @@ public:
     vector<int> fleury(int vOrigem);
     bool procurar(vector<int> visitados, int valor);
     vector<int> DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino);
+    int obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino);
     //uteis
+    Aresta* buscarAresta(int vOrigem, int vDestino);
     vector<Aresta *>  arestasVizinhas(int vertice);
     vector<int>  verticesVizinhos(int vertice);
     vector<int> vImpares();
@@ -41,6 +43,7 @@ public:
     bool eEuleriano();
     bool proximaArestaEValida(int vertice, Aresta* caminho);
     int numVAlcancaveis(int origem);
+    Grafo* duplicarArestas(int origem);
 private:
 
 

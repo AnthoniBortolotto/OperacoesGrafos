@@ -1,0 +1,11 @@
+﻿  Aresta.cpp
+  Grafo.cpp
+D:\C\Grafos\Grafos\Grafo.cpp(265,2): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+D:\C\Grafos\Grafos\Grafo.cpp(313,47): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+  main.cpp
+D:\C\Grafos\Grafos\main.cpp(33,2): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+  Gerando código
+  Previous IPDB not found, fall back to full compilation.
+  All 232 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finalizada a geração de código
+  Grafos.vcxproj -> D:\C\Grafos\x64\Release\Grafos.exe

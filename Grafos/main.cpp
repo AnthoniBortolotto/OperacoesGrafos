@@ -17,21 +17,24 @@ void exibirMatriz(const vector<vector<int>>& matriz) {
 	}
 }
 
-void exibirDijkstra(vector<int> djikstra, int vOrigem, int vDestino, int DistTotal) { //refatorar com o traduzirDijkstra
+void exibirDijkstra(Grafo* grafo, vector<int> djikstra, int vOrigem, int vDestino) { //refatorar com o traduzirDijkstra
 	vector<int> ordem;
 	int i = vDestino;
-	while (true) {
-		ordem.push_back(djikstra[i]); 
-		i = ordem[ordem.size() - 1];
-		if (i == vOrigem) break; //trocar depois
+	if (vOrigem != vDestino) {
+		while (true) {
+			ordem.push_back(djikstra[i]);
+			i = ordem[ordem.size() - 1];
+			if (i == vOrigem) break; //trocar depois
+		}
 	}
-	cout << "Peso total: " << DistTotal << endl;
+	
+	cout << "Peso total: " << grafo->obterDistDijkstra(djikstra, vOrigem, vDestino) << endl;
 	cout << "Sequencia:\n";
 	for (i = ordem.size() - 1; i >= 0; i--)
 	{
-		cout << ordem[i] << "-";
+		cout << ordem[i]+1 << "-"; //pra ficar igual o grafo
 	}
-	cout << vDestino << endl;
+	cout << vDestino+1 << endl;
 }
 
 int main()
@@ -49,7 +52,7 @@ int main()
 	auto* a8 = new Aresta(1, 3, 4);
 	auto* a9 = new Aresta(1, 4, 3);*/
 
-	auto* a1 = new Aresta(1, 0, 4);
+	/*auto* a1 = new Aresta(1, 0, 4);
 	auto* a2 = new Aresta(1, 4, 0);
 
 	auto* a3 = new Aresta(3, 0, 1);
@@ -74,16 +77,35 @@ int main()
 
 
 	auto* a15 = new Aresta(1, 1, 4);
-	auto* a16 = new Aresta(1, 4, 1);
+	auto* a16 = new Aresta(1, 4, 1);*/
 
-	Grafo* grafo;
-	grafo = Grafo::criarGrafo(5, 16, {a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16});
-
+	//questão 3
 	int input  = 0;
 	bool continuar = true;
 	int origem = 0;
 	int destino = 2;
 	int dist = 0;
+
+	auto* a1 = new Aresta(10, 0, 1);
+	auto* a2 = new Aresta(5, 0, 4);
+
+	auto* a3 = new Aresta(1, 1, 2);
+	auto* a4 = new Aresta(3, 1, 4);
+
+	auto* a5 = new Aresta(4, 2, 3);
+
+	auto* a6 = new Aresta(7, 3, 0);
+	auto* a7 = new Aresta(6, 3, 2);
+
+	auto* a8 = new Aresta(2, 4, 3);
+	auto* a9 = new Aresta(9, 4, 2);
+	auto* a10 = new Aresta(2, 4, 1);
+
+	Grafo* grafo;
+	int numV = 5;
+	int numA = 10;
+	grafo = Grafo::criarGrafo(numV, numA, { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10 });
+	vector<int> res;
 	//vector<int> res = grafo->dijkstra(origem, destino, dist);
 //	grafo->proximaArestaEValida(4, a5);
 	while (continuar)
@@ -94,32 +116,47 @@ int main()
 		cout << "3 - Floyd\n";
 		cout << "4 - Dijkstra";
 		cout << "\n5 - Fleury\n";
-		cout << "6 - Sair\n";
+		cout << "6 - resolver questao 3\n";
+		cout << "7 - Sair\n";
 		cin >> input;
 		switch (input)
 		{
 		case 1:
             //system("clear");
 			cout << " -- Matriz de Custo --" << endl;
-			exibirMatriz(grafo->mCusto);
+			//exibirMatriz(grafo->mCusto);
 			break;
 		case 2:
             //system("clear");
             cout << " -- Matriz de Roteamento --" << endl;
-            exibirMatriz(grafo->mRoteamento);
+            //exibirMatriz(grafo->mRoteamento);
 			break;
 		case 3:
             //system("clear");
-            grafo->algoritmoFloyd();
+           // grafo->algoritmoFloyd();
 			break;
 		case 4:
 			//exibirDijkstra(res, origem, destino, dist);
             //exit(0);
 		case 5:
             //system("clear");
-			grafo->fleury(0);
+			//grafo->fleury(0);
 			break;
 		case 6:
+			
+			for (int i = 0; i < numV; i++) {
+				for (int j = 0; j < numV; j++)
+				{
+					cout << "melhor percurso do vertice " << i + 1;
+					cout << " ate " << j + 1 << endl;
+					res = grafo->dijkstra(i, j, dist);
+					exibirDijkstra(grafo, res, i, j);
+				}
+			}
+			
+
+			break;
+		case 7:
 			continuar = false;
 			break;
 		default:
