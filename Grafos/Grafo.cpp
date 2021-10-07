@@ -39,7 +39,7 @@ void Grafo::algoritmoFloyd()
 
 	int k = 0;
 	//  Exibir dados
-	while (this->verificarMatriz(-1, tempMCusto) && k <= tempMCusto.size()) {
+	while (this->verificarMatriz(-1, tempMCusto) && k < tempMCusto.size()) {
 
 		cout << "matriz de custo: " << k << endl;
 		for (int i = 0; i < tempMCusto.size(); i++)
@@ -251,9 +251,26 @@ bool Grafo::procurar(vector<int> visitados, int valor) {
 	return false;
 }
 
+vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino)
+{
+	vector<int> ordem;
+	int i = vDestino;
+	while (true) {
+		ordem.push_back(djikstra[i]);
+		i = ordem[ordem.size() - 1];
+		if (i == vOrigem) break; //trocar depois
+	}
+	vector<int> inverso;
+	for (i = ordem.size() - 1; i >= 0; i--)
+	{
+		inverso.push_back(ordem[i]);
+	}
+	return inverso;
+}
+
 vector<Aresta*> Grafo::arestasVizinhas(int vertice) {
 	vector<Aresta*> vizinhos;
-	for (int i = 0; i < this->numA; i++) {
+	for (int i = 0; i < this->arestas.size(); i++) {
 		if (this->arestas[i]->origem == vertice)
 			vizinhos.push_back(this->arestas[i]);
 	}
@@ -275,6 +292,16 @@ vector<int> Grafo::verticesVizinhos(int vertice)
 		if (adicionar) vVizinhos.push_back(aVizinhas[i]->destino);
 	}
 	return vVizinhos;
+}
+
+vector<int> Grafo::vImpares()
+{
+	vector<int> vI;
+	for (auto vertice: this->vertices)
+	{
+		if ((this->arestasVizinhas(vertice).size() / 2) % 2 != 0) vI.push_back(vertice);
+	}
+	return vI;
 }
 
 bool Grafo::eEuleriano()

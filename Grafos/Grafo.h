@@ -32,9 +32,11 @@ public:
     vector<int> dijkstra(int vOrigem, int vDestino, int &distTotal);
     vector<int> fleury(int vOrigem);
     bool procurar(vector<int> visitados, int valor);
+    vector<int> DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino);
     //uteis
     vector<Aresta *>  arestasVizinhas(int vertice);
     vector<int>  verticesVizinhos(int vertice);
+    vector<int> vImpares();
     //Fleury
     bool eEuleriano();
     bool proximaArestaEValida(int vertice, Aresta* caminho);

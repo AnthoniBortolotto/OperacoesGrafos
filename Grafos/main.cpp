@@ -17,7 +17,7 @@ void exibirMatriz(const vector<vector<int>>& matriz) {
 	}
 }
 
-void exibirDijkstra(vector<int> djikstra, int vOrigem, int vDestino, int DistTotal) {
+void exibirDijkstra(vector<int> djikstra, int vOrigem, int vDestino, int DistTotal) { //refatorar com o traduzirDijkstra
 	vector<int> ordem;
 	int i = vDestino;
 	while (true) {
@@ -59,7 +59,7 @@ int main()
 	auto* a6 = new Aresta(4, 2, 0);
 
 	auto* a7 = new Aresta(1, 0, 3);
-	auto* a8 = new Aresta(1, 0, 3);
+	auto* a8 = new Aresta(1, 3, 0);
 
 	
 	auto* a9 = new Aresta(1, 1, 2);
@@ -93,7 +93,8 @@ int main()
 		cout << "2 - Matriz de Roteamento\n";
 		cout << "3 - Floyd\n";
 		cout << "4 - Dijkstra";
-		cout << "\n5 - Sair\n";
+		cout << "\n5 - Fleury\n";
+		cout << "6 - Sair\n";
 		cin >> input;
 		switch (input)
 		{
@@ -115,8 +116,10 @@ int main()
 			//exibirDijkstra(res, origem, destino, dist);
             //exit(0);
 		case 5:
-			grafo->proximaArestaEValida(4, a5);
             //system("clear");
+			grafo->fleury(0);
+			break;
+		case 6:
 			continuar = false;
 			break;
 		default:
