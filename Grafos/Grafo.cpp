@@ -156,7 +156,7 @@ bool Grafo::verificarMatriz(int alvo, vector<vector<int>> matriz) {
 	return false;
 }
 
-vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int& distTotal)
+vector<int> Grafo::dijkstra(int vOrigem, int vDestino)
 {
 	int menor = -1;
 	//Ant é a ordem em que os vértices são visitados
@@ -189,20 +189,6 @@ vector<int> Grafo::dijkstra(int vOrigem, int vDestino, int& distTotal)
 			}
 		}
 	}
-	////exibir matriz
-	//cout << "vetor de distancias\n";
-	//for (int i = 0; i < distancias.size(); i++)
-	//{
-	//	cout << distancias[i] << " ";
-
-	//}
-	//cout << "\nordem de percorrer\n";
-	//for (int i = 0; i < ordem.size(); i++)
-	//{
-	//	cout << ordem[i] << " ";
-
-	//}
-	distTotal = distancias[vDestino];
 	return ordem;
 }
 
@@ -372,7 +358,35 @@ int Grafo::numVAlcancaveis(int origem)
 	return cont;
 }
 
-Grafo* Grafo::duplicarArestas(int origem)
+Grafo* Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
-	return nullptr;
+	auto vImpares = this->vImpares();
+	if (vImpares.size() == 0) return this;
+	auto superGrafo = this;
+	vector<vector<int>> visitado;
+	vector<Aresta*> novasArestas;
+	int dist = 0;
+	for (auto vImpar1 : vImpares) {
+		for (auto vImpar2 : vImpares) {
+			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) {
+				dist = this->obterDistDijkstra(this->dijkstra(vImpar1, vImpar2), vImpar1, vImpar2);
+				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
+				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
+				visitado.push_back({ vImpar1, vImpar2 });
+			}
+		}
+	}
+	//precisa somar  de duas em duas as arestas e pegar a que dá o menor valor
+	
+}
+
+bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
+{
+	if(visitados.empty()) return false;
+	vector<int> dupla1 = { v1, v2 };
+	vector<int> dupla2 = { v2, v1 };
+	for (auto visitado : visitados) {
+		if (dupla1 == visitado || dupla2 == visitado) return true;
+	}
+	return false;
 }

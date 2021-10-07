@@ -84,7 +84,6 @@ int main()
 	bool continuar = true;
 	int origem = 0;
 	int destino = 2;
-	int dist = 0;
 
 	auto* a1 = new Aresta(10, 0, 1);
 	auto* a2 = new Aresta(5, 0, 4);
@@ -149,7 +148,7 @@ int main()
 				{
 					cout << "melhor percurso do vertice " << i + 1;
 					cout << " ate " << j + 1 << endl;
-					res = grafo->dijkstra(i, j, dist);
+					res = grafo->dijkstra(i, j);
 					exibirDijkstra(grafo, res, i, j);
 				}
 			}

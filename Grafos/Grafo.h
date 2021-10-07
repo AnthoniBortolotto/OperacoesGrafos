@@ -29,7 +29,7 @@ public:
 
     //Dijsktra
     int menorDistancia(vector<int> dist, vector<int> visitados);
-    vector<int> dijkstra(int vOrigem, int vDestino, int &distTotal);
+    vector<int> dijkstra(int vOrigem, int vDestino);
     vector<int> fleury(int vOrigem);
     bool procurar(vector<int> visitados, int valor);
     vector<int> DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino);
@@ -44,6 +44,7 @@ public:
     bool proximaArestaEValida(int vertice, Aresta* caminho);
     int numVAlcancaveis(int origem);
     Grafo* duplicarArestas(int origem);
+    bool verificarVisita(vector<vector<int>> visitados, int v1, int v2);
 private:
 
 
