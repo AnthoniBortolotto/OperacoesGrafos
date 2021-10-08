@@ -281,6 +281,16 @@ Aresta* Grafo::buscarAresta(int vOrigem, int vDestino)
 	return NULL;
 }
 
+Aresta* Grafo::buscarArestaNOrientada(int vOrigem, int vDestino, vector<vector<Aresta*>> arestas)
+{
+	for (auto arestaDupla : arestas) {
+		if (arestaDupla[0]->origem == vOrigem && arestaDupla[1]->destino == vDestino) return arestaDupla[0];
+		if (arestaDupla[0]->origem == vDestino && arestaDupla[1]->destino == vOrigem) return arestaDupla[0];
+	}
+	return NULL;
+}
+
+
 vector<Aresta*> Grafo::arestasVizinhas(int vertice) {
 	vector<Aresta*> vizinhos;
 	for (int i = 0; i < this->arestas.size(); i++) {
@@ -371,13 +381,27 @@ Grafo* Grafo::duplicarArestas(int origem) //apenas não direcionado
 			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) {
 				dist = this->obterDistDijkstra(this->dijkstra(vImpar1, vImpar2), vImpar1, vImpar2);
 				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
-				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
 				visitado.push_back({ vImpar1, vImpar2 });
 			}
 		}
 	}
 	//precisa somar  de duas em duas as arestas e pegar a que dá o menor valor
+	/*vector<vector<Aresta*>> dupla;
+	for (auto novaAresta1 : novasArestas) {
+		for (auto novaAresta2 : novasArestas)
+		{
+			if (novaAresta1 != novaAresta2 && buscarArestaNOrientada(novaAresta1->origem, novaAresta2->origem, dupla) == NULL)
+				dupla.push_back({novaAresta1, novaAresta2});
+		}
+	}
 	
+	for (auto dupla1 : dupla) {
+		for (auto dupla2 : dupla)
+		{
+			if (dupla1 != dupla2)
+				dupla.push_back({ novaAresta1, novaAresta2 });
+		}
+	}*/
 }
 
 bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)

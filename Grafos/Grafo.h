@@ -36,6 +36,7 @@ public:
     int obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino);
     //uteis
     Aresta* buscarAresta(int vOrigem, int vDestino);
+    Aresta* buscarArestaNOrientada(int vOrigem, int vDestino, vector<vector<Aresta*>> arestas);
     vector<Aresta *>  arestasVizinhas(int vertice);
     vector<int>  verticesVizinhos(int vertice);
     vector<int> vImpares();
