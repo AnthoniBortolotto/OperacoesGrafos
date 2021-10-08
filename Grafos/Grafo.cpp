@@ -237,7 +237,7 @@ bool Grafo::procurar(vector<int> visitados, int valor) {
 	}
 	return false;
 }
-
+//retorna um array com a ordem dos vertices
 vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino)
 {
 	vector<int> ordem;
@@ -259,7 +259,7 @@ vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDes
 	inverso.push_back(vDestino);
 	return inverso;
 }
-
+//através do resultado do djikstra, da origem e destino retorna a distancia
 int Grafo::obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino)
 {
 	auto traducao = this->DjikstraTraduzido(djikstra, vOrigem, vDestino);
@@ -327,6 +327,39 @@ vector<int> Grafo::vImpares()
 	return vI;
 }
 
+int Grafo::somarDistDeArestas(vector<Aresta*> arestas)
+{
+	int acumulador = 0;
+	for (auto aresta : arestas) acumulador += aresta->peso;
+	return acumulador;
+}
+
+vector<vector<Aresta*>> Grafo::removerDuplicatas(vector<vector<Aresta*>> conjunto)
+{
+	int igualdadesMaximas = conjunto[0].size();
+	int igualdadesObtidas = 0;
+	vector<vector<Aresta*>> conjuntoLimpo;
+	vector<int> marcados;
+	for (int i = 0; i < conjunto.size(); i++) {
+		if (marcados.empty() || find(marcados.begin(), marcados.end(), i) == marcados.end()) {
+			for (int j = 0 + i; j < conjunto.size(); j++)
+			{
+				for (auto aresta : conjunto[j]) { //conjunto de procura
+					for (int n = 0; n < igualdadesMaximas; n++) {
+						if (aresta == conjunto[i][n]) igualdadesObtidas++; //se uma aresta encontra outra igual em outra posição ela adiciona igualdadesObtidas
+					}
+				}
+				if (igualdadesObtidas == igualdadesMaximas) marcados.push_back(j); //marca lugares que foram removidos 
+				igualdadesObtidas = 0;
+			}
+		}
+	}
+	for (int i = 0; i < conjunto.size(); i++) {
+		if (find(marcados.begin(), marcados.end(), i) == marcados.end()) conjuntoLimpo.push_back(conjunto[i]); //checa se i não está marcado
+	}
+	return conjuntoLimpo;
+}
+
 bool Grafo::eEuleriano()
 {
 	int numVerticesImpares = 0;
@@ -372,19 +405,25 @@ Grafo* Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
 	auto vImpares = this->vImpares();
 	if (vImpares.size() == 0) return this;
-	auto superGrafo = this;
 	vector<vector<int>> visitado;
 	vector<Aresta*> novasArestas;
 	int dist = 0;
+	//gera arestas entre cada numero par
 	for (auto vImpar1 : vImpares) {
 		for (auto vImpar2 : vImpares) {
-			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) {
+			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) { //impede repetição de aresta
 				dist = this->obterDistDijkstra(this->dijkstra(vImpar1, vImpar2), vImpar1, vImpar2);
 				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
+				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
 				visitado.push_back({ vImpar1, vImpar2 });
 			}
 		}
 	}
+	auto superGrafo = new Grafo();
+	superGrafo->criarGrafo(vImpares.size(), novasArestas.size(), novasArestas); // cria grafo com os vertices impares
+	int tamConjunto = vImpares.size() / 2; //pra definir se vão ser feitas duplas, trios, etc...
+	vector<int> vVisitados;
+
 	//precisa somar  de duas em duas as arestas e pegar a que dá o menor valor
 	/*vector<vector<Aresta*>> dupla;
 	for (auto novaAresta1 : novasArestas) {
@@ -413,4 +452,47 @@ bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
 		if (dupla1 == visitado || dupla2 == visitado) return true;
 	}
 	return false;
+}
+
+vector<vector<Aresta*>> combinarArestas(vector<Aresta*> conjunto, int tam) {
+
+	vector<vector<Aresta*>> subConjunto;
+
+	for (int i = 0; i < conjunto.size(); i++)
+	{
+		vector< vector<Aresta*> > temp;
+
+		for (int j = 0; j < temp.size(); j++) {
+			temp[j].push_back(conjunto[i]);
+		}
+			
+
+		for (int j = 0; j < temp.size(); j++) {
+			if(temp.size() == tam) subConjunto.push_back(temp[j]);
+		}
+			
+	}
+	//isso tem todos os conjuntos possíveis de array incluindo duplicatas
+	//remover duplicatas
+	subConjunto = this.removerDuplicatas(subConjunto);
+	return subConjunto;
+
+
+	/*vector<vector<Aresta*>> res;
+	vector<Aresta*> temp;
+	for (int i = 0; i < conjunto.size(); ++i)
+	{
+		for (int j = i + tam; j < conjunto.size(); ++j)
+		{
+			for (int k = i + 1; k < tam; k++)
+			{
+				
+			}
+			temp.push_back(conjunto[i]);
+			temp.push_back(conjunto[j]);
+			res.push_back();
+			temp = {};
+		}
+	}*/
+	
 }

@@ -40,6 +40,8 @@ public:
     vector<Aresta *>  arestasVizinhas(int vertice);
     vector<int>  verticesVizinhos(int vertice);
     vector<int> vImpares();
+    int somarDistDeArestas(vector<Aresta*> arestas);
+    vector<vector<Aresta*>> removerDuplicatas(vector<vector<Aresta*>> conjunto);
     //Fleury
     bool eEuleriano();
     bool proximaArestaEValida(int vertice, Aresta* caminho);
