@@ -401,10 +401,10 @@ int Grafo::numVAlcancaveis(int origem)
 	return cont;
 }
 
-Grafo* Grafo::duplicarArestas(int origem) //apenas não direcionado
+void Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
 	auto vImpares = this->vImpares();
-	if (vImpares.size() == 0) return this;
+	if (vImpares.size() == 0) return;
 	vector<vector<int>> visitado;
 	vector<Aresta*> novasArestas;
 	int dist = 0;
@@ -419,28 +419,44 @@ Grafo* Grafo::duplicarArestas(int origem) //apenas não direcionado
 			}
 		}
 	}
-	auto superGrafo = new Grafo();
-	superGrafo->criarGrafo(vImpares.size(), novasArestas.size(), novasArestas); // cria grafo com os vertices impares
 	int tamConjunto = vImpares.size() / 2; //pra definir se vão ser feitas duplas, trios, etc...
-	vector<int> vVisitados;
-
+	auto conjuntoArestas = this->combinarArestas(novasArestas, tamConjunto);
+	int menor = -1;
 	//precisa somar  de duas em duas as arestas e pegar a que dá o menor valor
-	/*vector<vector<Aresta*>> dupla;
-	for (auto novaAresta1 : novasArestas) {
-		for (auto novaAresta2 : novasArestas)
+	bool mesmaAresta = false;
+	int res1 = 0;
+	int res2 = 0;
+	for (int i = 0; i < conjuntoArestas.size(); i++)
+	{
+		res1 = 0;
+		for (auto are : conjuntoArestas[i]) res1 += are->peso;
+
+		for (int j = 0 + i; j < conjuntoArestas.size(); j++)
 		{
-			if (novaAresta1 != novaAresta2 && buscarArestaNOrientada(novaAresta1->origem, novaAresta2->origem, dupla) == NULL)
-				dupla.push_back({novaAresta1, novaAresta2});
+
+			for (auto aresta : conjuntoArestas[i]) { //conjunto de procura
+				if (find(conjuntoArestas[j].begin(), conjuntoArestas[j].end(), aresta) != conjuntoArestas[j].end()) mesmaAresta = true;
+			}
+			if (!mesmaAresta)
+			{
+				res2 = 0;
+				for (auto are : conjuntoArestas[j]) res1 += are->peso;
+				//fazer soma
+				int total = res1 + res2;
+				if (menor == -1 || menor > total) 
+				{ 
+					menor = total;
+					//junta o conjunto
+					novasArestas = conjuntoArestas[i];
+					novasArestas.insert(novasArestas.end(), conjuntoArestas[j].begin(), conjuntoArestas[j].end());
+				}
+
+			}
+			mesmaAresta = false;
+
 		}
 	}
-	
-	for (auto dupla1 : dupla) {
-		for (auto dupla2 : dupla)
-		{
-			if (dupla1 != dupla2)
-				dupla.push_back({ novaAresta1, novaAresta2 });
-		}
-	}*/
+	this->arestas.insert(this->arestas.end(), novasArestas.begin(), novasArestas.end());
 }
 
 bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
@@ -453,17 +469,17 @@ bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
 	}
 	return false;
 }
-
-vector<vector<Aresta*>> combinarArestas(vector<Aresta*> conjunto, int tam) {
+//Combina todas as arestas
+vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> subConjuntos, int tam) {
 
 	vector<vector<Aresta*>> subConjunto;
 
-	for (int i = 0; i < conjunto.size(); i++)
+	for (int i = 0; i < subConjuntos.size(); i++)
 	{
 		vector< vector<Aresta*> > temp;
 
 		for (int j = 0; j < temp.size(); j++) {
-			temp[j].push_back(conjunto[i]);
+			temp[j].push_back(subConjuntos[i]);
 		}
 			
 
@@ -472,27 +488,9 @@ vector<vector<Aresta*>> combinarArestas(vector<Aresta*> conjunto, int tam) {
 		}
 			
 	}
-	//isso tem todos os conjuntos possíveis de array incluindo duplicatas
-	//remover duplicatas
-	subConjunto = this.removerDuplicatas(subConjunto);
-	return subConjunto;
-
-
-	/*vector<vector<Aresta*>> res;
-	vector<Aresta*> temp;
-	for (int i = 0; i < conjunto.size(); ++i)
-	{
-		for (int j = i + tam; j < conjunto.size(); ++j)
-		{
-			for (int k = i + 1; k < tam; k++)
-			{
-				
-			}
-			temp.push_back(conjunto[i]);
-			temp.push_back(conjunto[j]);
-			res.push_back();
-			temp = {};
-		}
-	}*/
+	//isso gera todos os conjuntos possíveis de array incluindo duplicatas
 	
+	subConjunto = this->removerDuplicatas(subConjunto); //remove duplicatas
+	
+	return subConjunto;	
 }

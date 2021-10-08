@@ -46,8 +46,9 @@ public:
     bool eEuleriano();
     bool proximaArestaEValida(int vertice, Aresta* caminho);
     int numVAlcancaveis(int origem);
-    Grafo* duplicarArestas(int origem);
+    void duplicarArestas(int origem);
     bool verificarVisita(vector<vector<int>> visitados, int v1, int v2);
+    vector<vector<Aresta*>> combinarArestas(vector<Aresta*> conjunto, int tam);
 private:
 
 
