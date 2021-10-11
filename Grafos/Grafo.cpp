@@ -161,19 +161,18 @@ vector<int> Grafo::dijkstra(int vOrigem, int vDestino)
 	int menor = -1;
 	//Ant é a ordem em que os vértices são visitados
 	vector<int> visitados(this->numV, 0), ordem(this->numV, -1), distancias(this->numV, -1);
-	distancias[vOrigem] = 0;
-	ordem[vOrigem] = -2;// a distância da origem até ela própria é 0
+	distancias[vOrigem] = 0; // a distância da origem até ela própria é 0
+	ordem[vOrigem] = -2; //sinaliza a origem
 	for (int cont = 0; cont < this->numV; cont++)
 	{
 		menor = this->menorDistancia(distancias, visitados); //começar teste com i = 1
 		if (menor == -1) break; //melhorar mais tarde
 		visitados[menor] = 1;
 		auto aVizinhas = this->arestasVizinhas(menor);
-		for (int j = 0; j < aVizinhas.size(); j++)
+		for (int j = 0; j < aVizinhas.size(); j++) // indice = 3 problema
 		{
-			//descobrir qual dado das arestas vizinhas se quer
 			int indice = aVizinhas[j]->destino; //chance de dar ruim alta aqui
-			if (distancias[indice] == -1) //verifica se não existe distância até o vizinho
+			if (distancias[indice] == -1) //verifica se não existe ainda distância até o vizinho
 			{
 				if (distancias[menor] >= 0) distancias[indice] = distancias[menor] + aVizinhas[j]->peso;
 				else distancias[indice] = aVizinhas[j]->peso;
@@ -221,7 +220,7 @@ int Grafo::menorDistancia(vector<int> dist, vector<int> visitados)
 {
 	int indiceDistMenor = -1;
 	for (int i = 0; i < this->numV; ++i) {
-		if (visitados[i] == 0 && (indiceDistMenor == -1 || (dist[i] < dist[indiceDistMenor] && dist[i] >= 0))) {
+		if (visitados[i] == 0 && dist[i] >= 0 && (indiceDistMenor == -1 || (dist[i] < dist[indiceDistMenor]))) {
 			indiceDistMenor = i;
 		}
 	}
@@ -247,7 +246,7 @@ vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDes
 		return ordem;
 	}
 	int i = vDestino;
-	while (true) {
+	while (true) { // problema um diz que o melhor caminho é o outro, causando loop infinito
 		ordem.push_back(djikstra[i]);
 		i = ordem[ordem.size() - 1];
 		if (i == vOrigem) break; //trocar depois
