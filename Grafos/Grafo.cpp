@@ -196,6 +196,7 @@ vector<int> Grafo::fleury(int vOrigem)
 {
 	int vAtual = vOrigem;
 	vector<int> res;
+	this->duplicarArestas(vOrigem);
 	while (true)
 	{
 		auto aVizinhas = this->arestasVizinhas(vAtual);
@@ -206,7 +207,7 @@ vector<int> Grafo::fleury(int vOrigem)
 				res.push_back(vAtual);
 				vAtual = aVizinhas[i]->destino;
 				//deletar aresta
-				this->arestas.erase(std::remove(this->arestas.begin(), this->arestas.end(), aVizinhas[i]), this->arestas.end());
+				this->apagarAresNOrientada(aVizinhas[i]);
 				break;
 			}
 		}
@@ -316,13 +317,13 @@ vector<int> Grafo::verticesVizinhos(int vertice)
 	}
 	return vVizinhos;
 }
-
-vector<int> Grafo::vImpares()
+//retorna os vértices impares
+vector<int> Grafo::vImpares() // testado
 {
 	vector<int> vI;
 	for (auto vertice : this->vertices)
 	{
-		if ((this->arestasVizinhas(vertice).size() / 2) % 2 != 0) vI.push_back(vertice);
+		if (this->arestasVizinhas(vertice).size() % 2 != 0) vI.push_back(vertice);
 	}
 	return vI;
 }
@@ -358,6 +359,29 @@ vector<vector<Aresta*>> Grafo::removerDuplicatas(vector<vector<Aresta*>> conjunt
 		if (find(marcados.begin(), marcados.end(), i) == marcados.end()) conjuntoLimpo.push_back(conjunto[i]); //checa se i não está marcado
 	}
 	return conjuntoLimpo;
+}
+
+vector<Aresta*> Grafo::tirarOrientacao(vector<Aresta*> arestas)
+{
+	auto temp = arestas;
+	for (int i = 0; i < temp.size(); i++)
+	{
+		temp.push_back(new Aresta(temp[i]->peso, temp[i]->destino, temp[i]->origem));
+	}
+	return temp;
+}
+
+void Grafo::apagarAresNOrientada(Aresta* aresta)
+{
+	Aresta* apagar;
+	for (auto are : this->arestas) {
+		if (are->peso == aresta->peso && are->destino == aresta->origem && are->origem == aresta->destino) {
+			apagar = are;
+			break;
+		}
+	}
+	this->arestas.erase(std::remove(this->arestas.begin(), this->arestas.end(), apagar), this->arestas.end());
+	this->arestas.erase(std::remove(this->arestas.begin(), this->arestas.end(), aresta), this->arestas.end());
 }
 
 bool Grafo::eEuleriano()
@@ -400,7 +424,7 @@ int Grafo::numVAlcancaveis(int origem)
 	}
 	return cont;
 }
-
+//cria as novas arestas em grafos não eulerianos
 void Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
 	auto vImpares = this->vImpares();
@@ -456,6 +480,7 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 
 		}
 	}
+	novasArestas = this->tirarOrientacao(novasArestas);
 	this->arestas.insert(this->arestas.end(), novasArestas.begin(), novasArestas.end());
 }
 

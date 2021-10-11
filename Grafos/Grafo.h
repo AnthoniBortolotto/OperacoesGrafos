@@ -30,7 +30,6 @@ public:
     //Dijsktra
     int menorDistancia(vector<int> dist, vector<int> visitados);
     vector<int> dijkstra(int vOrigem, int vDestino);
-    vector<int> fleury(int vOrigem);
     bool procurar(vector<int> visitados, int valor);
     vector<int> DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino);
     int obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino);
@@ -42,6 +41,8 @@ public:
     vector<int> vImpares();
     int somarDistDeArestas(vector<Aresta*> arestas);
     vector<vector<Aresta*>> removerDuplicatas(vector<vector<Aresta*>> conjunto);
+    vector<Aresta*> tirarOrientacao(vector<Aresta*> arestas);
+    void apagarAresNOrientada(Aresta* aresta);
     //Fleury
     bool eEuleriano();
     bool proximaArestaEValida(int vertice, Aresta* caminho);
@@ -49,6 +50,7 @@ public:
     void duplicarArestas(int origem);
     bool verificarVisita(vector<vector<int>> visitados, int v1, int v2);
     vector<vector<Aresta*>> combinarArestas(vector<Aresta*> conjunto, int tam);
+    vector<int> fleury(int vOrigem);
 private:
 
 

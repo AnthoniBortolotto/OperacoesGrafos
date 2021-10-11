@@ -1,5 +1,1 @@
-﻿  Grafo.cpp
-D:\C\Grafos\Grafos\Grafo.cpp(255,2): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-D:\C\Grafos\Grafos\Grafo.cpp(325,47): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-  LINK : D:\C\Grafos\x64\Debug\Grafos.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
-  Grafos.vcxproj -> D:\C\Grafos\x64\Debug\Grafos.exe
+﻿  Grafos.vcxproj -> D:\C\Grafos\x64\Debug\Grafos.exe
