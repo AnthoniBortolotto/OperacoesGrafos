@@ -33,6 +33,7 @@ public:
     bool procurar(vector<int> visitados, int valor);
     vector<int> DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino);
     int obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino);
+
     //uteis
     Aresta* buscarAresta(int vOrigem, int vDestino);
     Aresta* buscarArestaNOrientada(int vOrigem, int vDestino, vector<vector<Aresta*>> arestas);
@@ -43,6 +44,7 @@ public:
     vector<vector<Aresta*>> removerDuplicatas(vector<vector<Aresta*>> conjunto);
     vector<Aresta*> tirarOrientacao(vector<Aresta*> arestas);
     void apagarAresNOrientada(Aresta* aresta);
+
     //Fleury
     bool eEuleriano();
     bool proximaArestaEValida(int vertice, Aresta* caminho);
@@ -51,8 +53,17 @@ public:
     bool verificarVisita(vector<vector<int>> visitados, int v1, int v2);
     vector<vector<Aresta*>> combinarArestas(vector<Aresta*> conjunto, int tam);
     vector<int> fleury(int vOrigem);
+
+    //Hungaro
+
+    void hungaro(vector<vector<int>> matriz);
+    void igualarLinhaColuna();
+    int menorValorLinha(vector<vector<int>> matriz, int linha);
+    int menorValorColuna(vector<vector<int>> matriz, int coluna);
+
 private:
 
 
+    void vector<vector<int>>(vector<vector<int>> matriz);
 };
 

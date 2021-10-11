@@ -1,9 +1,11 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/OperacoesGrafos.dir/Grafos/Aresta.cpp.o"
-  "CMakeFiles/OperacoesGrafos.dir/Grafos/Grafo.cpp.o"
-  "CMakeFiles/OperacoesGrafos.dir/Grafos/main.cpp.o"
-  "OperacoesGrafos"
+  "CMakeFiles/OperacoesGrafos.dir/Grafos/Aresta.cpp.obj"
+  "CMakeFiles/OperacoesGrafos.dir/Grafos/Grafo.cpp.obj"
+  "CMakeFiles/OperacoesGrafos.dir/Grafos/main.cpp.obj"
+  "OperacoesGrafos.exe"
+  "OperacoesGrafos.exe.manifest"
   "OperacoesGrafos.pdb"
+  "libOperacoesGrafos.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

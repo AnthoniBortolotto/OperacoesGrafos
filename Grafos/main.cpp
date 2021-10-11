@@ -7,7 +7,7 @@
 using namespace std;
 
 void exibirMatriz(const vector<vector<int>>& matriz) {
-	for (auto & i : matriz) //pq Mattes? Quem entende essa porra?
+	for (vector<int> i : matriz)
 	{
 		for (int j : i)
 		{
@@ -135,6 +135,21 @@ int main()
 	vector<int> res;
 	//vector<int> res = grafo->dijkstra(origem, destino, dist);
 //	grafo->proximaArestaEValida(4, a5);
+
+    //
+    // METODO HUNGARO DO SATANAS
+    vector<vector<int>> matrizHungaro {{10,4,8,6},
+                                       {6,4,9,10},
+                                       {6,7,8,9}};
+    //     L1, L2, L3, L4
+    /* E1,
+     * E2,
+     * E3
+     *
+     * Uma fábrica possui quatro locais L1, L2, L3 e L4 para receber três novos equipamentos (E1,
+        E2, E3). A operação desses equipamentos gera um fluxo de materiais cujo custo de manuseio
+        depende do local da instalação e, estão no quadro a seguir:
+     */
 	while (continuar)
 	{
 		cout << "Menu - Problema do Carteiro Chines\n";
@@ -193,22 +208,3 @@ int main()
 	
     return 0;
 }
-
-/*
- * algoritmo de fleury
-    função Fleury(G = (V,E): grafo) : caminho
-       G' := G     { G' = (V', E')}
-       v0 := um vértice de G'
-       C := [v0] {Inicialmente, o circuito contém só v0}
-       Enquanto E' não vazio
-           vi := último vértice de C
-           Se vi tem só uma aresta incidente;
-               ai := a aresta incidente a vi em G'
-           Senão
-               ai := uma aresta incidente a vi em G' e que não é uma ponte
-           Retirar a aresta ai do grafo G'
-           Acrescentar ai no final de C
-           vj := vértice ligado a vi por ai
-           Acrescentar vj no final de C
-       Retornar C
- */

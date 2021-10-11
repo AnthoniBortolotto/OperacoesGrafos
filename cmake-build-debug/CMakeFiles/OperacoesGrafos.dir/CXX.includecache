@@ -6,19 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/felipe/Git/OperacoesGrafos/Grafos/Aresta.h
+C:/Git/OperacoesGrafos/Grafos/Aresta.cpp
+Aresta.h
+C:/Git/OperacoesGrafos/Grafos/Aresta.h
+
+C:/Git/OperacoesGrafos/Grafos/Aresta.h
 vector
 -
 iostream
 -
 string.h
-/home/felipe/Git/OperacoesGrafos/Grafos/string.h
+C:/Git/OperacoesGrafos/Grafos/string.h
 
-/home/felipe/Git/OperacoesGrafos/Grafos/Grafo.cpp
+C:/Git/OperacoesGrafos/Grafos/Grafo.cpp
 Grafo.h
-/home/felipe/Git/OperacoesGrafos/Grafos/Grafo.h
+C:/Git/OperacoesGrafos/Grafos/Grafo.h
 Aresta.h
-/home/felipe/Git/OperacoesGrafos/Grafos/Aresta.h
+C:/Git/OperacoesGrafos/Grafos/Aresta.h
 list
 -
 queue
@@ -26,11 +30,21 @@ queue
 algorithm
 -
 
-/home/felipe/Git/OperacoesGrafos/Grafos/Grafo.h
+C:/Git/OperacoesGrafos/Grafos/Grafo.h
 vector
 -
 Aresta.h
-/home/felipe/Git/OperacoesGrafos/Grafos/Aresta.h
+C:/Git/OperacoesGrafos/Grafos/Aresta.h
 string
-/home/felipe/Git/OperacoesGrafos/Grafos/string
+C:/Git/OperacoesGrafos/Grafos/string
+
+C:/Git/OperacoesGrafos/Grafos/main.cpp
+iostream
+-
+vector
+-
+Aresta.h
+C:/Git/OperacoesGrafos/Grafos/Aresta.h
+Grafo.h
+C:/Git/OperacoesGrafos/Grafos/Grafo.h
 

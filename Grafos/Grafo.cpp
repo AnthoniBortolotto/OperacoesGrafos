@@ -3,6 +3,7 @@
 #include <list>
 #include <queue>
 #include <algorithm>
+#include "bits/stdc++.h"
 
 using namespace std;
 Grafo::Grafo()
@@ -521,4 +522,50 @@ vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> Conjunto, int tam
 	//subConjunto = this->removerDuplicatas(subConjunto); //remove duplicatas
 
 	return subConjunto;
+}
+
+void Grafo::hungaro(vector<vector<int>> matriz) {
+    this.igualarLinhaColuna(matriz);
+    //gerar matriz custo
+
+    for(int i = 0; i < matriz.size(); i++)
+    {
+        int menorValorLinha = this.menorValorLinha(matriz, i);
+               for(int j = 0; j < matriz[i].size(); j++)
+               {
+                   matriz[i][j] -= menorValorLinha;
+               }
+    }
+
+}
+
+int Grafo::menorValorLinha(vector<vector<int>> matriz, int linha) {
+    return min_element(matriz[linha].begin(), matriz[linha].end());
+}
+
+int Grafo::menorValorColuna(vector<vector<int>> matriz, int coluna) {
+    int menor = -1;
+    for (int i = 0; i < matriz.size(); ++i) {
+        if(menor == -1 || matriz[i][coluna] < menor) menor = matriz[i][coluna];
+    }
+    return menor;
+}
+
+
+vector<vector<int>> Grafo::igualarLinhaColuna(vector<vector<int>> matriz) {
+    if(matriz[0].size() == matriz.size()) return matriz;
+    else if(matriz[0].size() > matriz.size()){
+        for (int i = 0; i < matriz.size(); ++i) {
+            matriz[i].push_back(0);
+        }
+    }
+    else
+    {
+        vector<int> coluna;
+        for(int i = 0; i < matriz.size(); i++){
+            coluna.push_back(0);
+        }
+        matriz.push_back(coluna);
+    }
+    return matriz;
 }
