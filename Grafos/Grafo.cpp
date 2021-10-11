@@ -3,7 +3,9 @@
 #include <list>
 #include <queue>
 #include <algorithm>
-#include "bits/stdc++.h"
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 Grafo::Grafo()
@@ -367,7 +369,7 @@ vector<Aresta*> Grafo::tirarOrientacao(vector<Aresta*> arestas)
 	for (int i = 0; i < arestas.size(); i++)
 	{
 		//if(this->buscarAresta(temp[i]->destino, temp[i]->origem) == NULL || this->buscarAresta(temp[i]->destino, temp[i]->origem)->peso != temp[i]->peso)
-			temp.push_back(new Aresta(temp[i]->peso, temp[i]->destino, temp[i]->origem));
+		temp.push_back(new Aresta(temp[i]->peso, temp[i]->destino, temp[i]->origem));
 	}
 	return temp;
 }
@@ -515,7 +517,7 @@ vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> Conjunto, int tam
 			}
 			subConjunto.push_back(res);
 		}
-		
+
 	}
 	//isso gera todos os conjuntos possíveis de array incluindo duplicatas
 
@@ -525,47 +527,67 @@ vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> Conjunto, int tam
 }
 
 void Grafo::hungaro(vector<vector<int>> matriz) {
-    this.igualarLinhaColuna(matriz);
-    //gerar matriz custo
+	this->igualarLinhaColuna(matriz);
+	//gerar matriz custo
 
-    for(int i = 0; i < matriz.size(); i++)
-    {
-        int menorValorLinha = this.menorValorLinha(matriz, i);
-               for(int j = 0; j < matriz[i].size(); j++)
-               {
-                   matriz[i][j] -= menorValorLinha;
-               }
-    }
+	for (int i = 0; i < matriz.size(); i++) //subtraiu menor linha
+	{
+		int menorValorLinha = this->menorValorLinha(matriz, i);
+		for (int j = 0; j < matriz[i].size(); j++)
+		{
+			matriz[i][j] -= menorValorLinha;
+		}
+	}
+
+	for (int i = 0; i < matriz.size(); i++) //subtraiu menor coluna
+	{
+		
+		for (int j = 0; j < matriz[i].size(); j++)
+		{
+			int menorValorColuna = this->menorValorColuna(matriz, j);
+			matriz[i][j] -= menorValorColuna;
+		}
+	}
 
 }
 
 int Grafo::menorValorLinha(vector<vector<int>> matriz, int linha) {
-    return min_element(matriz[linha].begin(), matriz[linha].end());
+	int menor = -1;
+	for (int i = 0; i < matriz.size(); i++)
+	{
+		for (int j = 0; j < matriz[i].size(); j++)
+		{
+			if (menor == -1 || matriz[linha][j] < menor)
+				menor = matriz[linha][j];
+		}
+	}
+	return menor;
 }
 
 int Grafo::menorValorColuna(vector<vector<int>> matriz, int coluna) {
-    int menor = -1;
-    for (int i = 0; i < matriz.size(); ++i) {
-        if(menor == -1 || matriz[i][coluna] < menor) menor = matriz[i][coluna];
-    }
-    return menor;
+	int menor = -1;
+	for (int i = 0; i < matriz.size(); ++i) {
+		if (menor == -1 || matriz[i][coluna] < menor)
+			menor = matriz[i][coluna];
+	}
+	return menor;
 }
 
 
 vector<vector<int>> Grafo::igualarLinhaColuna(vector<vector<int>> matriz) {
-    if(matriz[0].size() == matriz.size()) return matriz;
-    else if(matriz[0].size() > matriz.size()){
-        for (int i = 0; i < matriz.size(); ++i) {
-            matriz[i].push_back(0);
-        }
-    }
-    else
-    {
-        vector<int> coluna;
-        for(int i = 0; i < matriz.size(); i++){
-            coluna.push_back(0);
-        }
-        matriz.push_back(coluna);
-    }
-    return matriz;
+	if (matriz[0].size() == matriz.size()) return matriz;
+	else if (matriz[0].size() > matriz.size()) {
+		for (int i = 0; i < matriz.size(); ++i) {
+			matriz[i].push_back(0);
+		}
+	}
+	else
+	{
+		vector<int> coluna;
+		for (int i = 0; i < matriz.size(); i++) {
+			coluna.push_back(0);
+		}
+		matriz.push_back(coluna);
+	}
+	return matriz;
 }

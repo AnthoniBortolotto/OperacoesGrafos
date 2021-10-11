@@ -54,12 +54,12 @@ public:
     vector<vector<Aresta*>> combinarArestas(vector<Aresta*> conjunto, int tam);
     vector<int> fleury(int vOrigem);
 
-    //Hungaro
-
     void hungaro(vector<vector<int>> matriz);
     void igualarLinhaColuna();
     int menorValorLinha(vector<vector<int>> matriz, int linha);
     int menorValorColuna(vector<vector<int>> matriz, int coluna);
+
+    vector<vector<int>> igualarLinhaColuna(vector<vector<int>> matriz);
 
 private:
 
