@@ -260,7 +260,7 @@ vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDes
 	return inverso;
 }
 //através do resultado do djikstra, da origem e destino retorna a distancia
-int Grafo::obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino)
+int Grafo::obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino) // testado
 {
 	auto traducao = this->DjikstraTraduzido(djikstra, vOrigem, vDestino);
 	int distancia = 0;
@@ -363,14 +363,15 @@ vector<vector<Aresta*>> Grafo::removerDuplicatas(vector<vector<Aresta*>> conjunt
 vector<Aresta*> Grafo::tirarOrientacao(vector<Aresta*> arestas)
 {
 	auto temp = arestas;
-	for (int i = 0; i < temp.size(); i++)
+	for (int i = 0; i < arestas.size(); i++)
 	{
-		temp.push_back(new Aresta(temp[i]->peso, temp[i]->destino, temp[i]->origem));
+		//if(this->buscarAresta(temp[i]->destino, temp[i]->origem) == NULL || this->buscarAresta(temp[i]->destino, temp[i]->origem)->peso != temp[i]->peso)
+			temp.push_back(new Aresta(temp[i]->peso, temp[i]->destino, temp[i]->origem));
 	}
 	return temp;
 }
 
-void Grafo::apagarAresNOrientada(Aresta* aresta)
+void Grafo::apagarAresNOrientada(Aresta * aresta)
 {
 	Aresta* apagar;
 	for (auto are : this->arestas) {
@@ -405,9 +406,10 @@ bool Grafo::proximaArestaEValida(int vertice, Aresta * caminho)
 	auto numvAlcancaveisAntes = this->numVAlcancaveis(vertice);
 	//remover a aresta caminho das arestas
 	//remove qualquer aresta igual a caminho 
-	this->arestas.erase(std::remove(this->arestas.begin(), this->arestas.end(), caminho), this->arestas.end()); //funciona
+	this->apagarAresNOrientada(caminho); //funciona
 	auto numvAlcancaveisDepois = this->numVAlcancaveis(vertice);
 	this->arestas.push_back(caminho);
+	this->arestas.push_back(new Aresta(caminho->peso, caminho->destino, caminho->origem));
 	if (numvAlcancaveisAntes > numvAlcancaveisDepois) return false;
 	return true;
 }
@@ -436,8 +438,9 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 		for (auto vImpar2 : vImpares) {
 			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) { //impede repetição de aresta
 				dist = this->obterDistDijkstra(this->dijkstra(vImpar1, vImpar2), vImpar1, vImpar2);
+				//inseria aresta não direcionada
 				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
-				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
+				//novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
 				visitado.push_back({ vImpar1, vImpar2 });
 			}
 		}
@@ -466,8 +469,8 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 				for (auto are : conjuntoArestas[j]) res1 += are->peso;
 				//fazer soma
 				int total = res1 + res2;
-				if (menor == -1 || menor > total) 
-				{ 
+				if (menor == -1 || menor > total)
+				{
 					menor = total;
 					//junta o conjunto
 					novasArestas = conjuntoArestas[i];
@@ -485,7 +488,7 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 
 bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
 {
-	if(visitados.empty()) return false;
+	if (visitados.empty()) return false;
 	vector<int> dupla1 = { v1, v2 };
 	vector<int> dupla2 = { v2, v1 };
 	for (auto visitado : visitados) {
@@ -493,28 +496,29 @@ bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
 	}
 	return false;
 }
+
+
 //Combina todas as arestas
-vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> subConjuntos, int tam) {
+vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> Conjunto, int tam) {
 
 	vector<vector<Aresta*>> subConjunto;
 
-	for (int i = 0; i < subConjuntos.size(); i++)
+	for (int i = 0; i < Conjunto.size(); i++)
 	{
-		vector< vector<Aresta*> > temp;
-
-		for (int j = 0; j < temp.size(); j++) {
-			temp[j].push_back(subConjuntos[i]);
+		vector<vector<Aresta*>> temp = subConjunto;
+		for (int n = 0; n < tam; n++) { //necessário e funcionando?
+			vector<Aresta*> res = { Conjunto[i] };
+			for (int j = 1 + i; tam != res.size(); j++)
+			{
+				res.push_back(Conjunto[j]);
+			}
+			subConjunto.push_back(res);
 		}
-			
-
-		for (int j = 0; j < temp.size(); j++) {
-			if(temp.size() == tam) subConjunto.push_back(temp[j]);
-		}
-			
+		
 	}
 	//isso gera todos os conjuntos possíveis de array incluindo duplicatas
-	
-	subConjunto = this->removerDuplicatas(subConjunto); //remove duplicatas
-	
-	return subConjunto;	
+
+	//subConjunto = this->removerDuplicatas(subConjunto); //remove duplicatas
+
+	return subConjunto;
 }

@@ -160,10 +160,10 @@ int main()
 			break;
 		case 3:
             //system("clear");
-           // grafo->algoritmoFloyd();
+            grafo->algoritmoFloyd();
 			break;
 		case 4:
-			//exibirDijkstra(res, origem, destino, dist);
+			exibirDijkstra(grafo, grafo->dijkstra(origem, destino), origem, destino);
             //exit(0);
 		case 5:
             //system("clear");
