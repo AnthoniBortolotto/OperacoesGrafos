@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Hungaro.h"
 #include "Aresta.h"
 #include "Grafo.h"
 
@@ -167,6 +168,8 @@ int main()
     vector<vector<int>> matrizHungaro {{10,4,8,6},
                                        {6,4,9,10},
                                        {6,7,8,9}};
+
+    Hungaro hungaro(matrizHungaro);
     //     L1, L2, L3, L4
     /* E1,
      * E2,
