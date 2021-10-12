@@ -431,7 +431,7 @@ int Grafo::numVAlcancaveis(int origem)
 //cria as novas arestas em grafos não eulerianos
 void Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
-	auto vImpares = this->vImpares();
+	auto vImpares = this->vImpares(); //funciona
 	if (vImpares.size() == 0) return;
 	vector<vector<int>> visitado;
 	vector<Aresta*> novasArestas;
@@ -448,11 +448,12 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 			}
 		}
 	}
-	int tamConjunto = vImpares.size() / 2; //pra definir se vão ser feitas duplas, trios, etc...
+	int tamConjunto = vImpares.size() / 2; //pra definir se vão ser feitas duplas, trios, etc... //funciona
 	auto conjuntoArestas = this->combinarArestas(novasArestas, tamConjunto);
 	int menor = -1;
 	//precisa somar  de duas em duas as arestas e pegar a que dá o menor valor
 	bool mesmaAresta = false;
+	this->removerDuplicatas(conjuntoArestas);
 	int res1 = 0;
 	int res2 = 0;
 	for (int i = 0; i < conjuntoArestas.size(); i++)
@@ -511,11 +512,11 @@ vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> Conjunto, int tam
 		vector<vector<Aresta*>> temp = subConjunto;
 		for (int n = 0; n < tam; n++) { //necessário e funcionando?
 			vector<Aresta*> res = { Conjunto[i] };
-			for (int j = 1 + i; tam != res.size(); j++)
+			for (int j = 1 + i; (tam != res.size() && j < Conjunto.size()); j++)
 			{
 				res.push_back(Conjunto[j]);
 			}
-			subConjunto.push_back(res);
+			if(res.size() == tam) subConjunto.push_back(res);
 		}
 
 	}

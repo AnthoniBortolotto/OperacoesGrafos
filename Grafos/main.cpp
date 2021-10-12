@@ -129,8 +129,8 @@ int main()
 	auto* a15 = new Aresta(5, 3, 4);
 	auto* a16 = new Aresta(5, 4, 3);
 
-	auto* a16 = new Aresta(3, 3, 5);
-	auto* a17 = new Aresta(3, 5, 3);
+	auto* a17 = new Aresta(3, 3, 5);
+	auto* a30 = new Aresta(3, 5, 3);
 
 	auto* a18 = new Aresta(3, 3, 8);
 	auto* a19 = new Aresta(3, 8, 3);
@@ -151,13 +151,13 @@ int main()
 	auto* a27 = new Aresta(2, 7, 6);
 
 	//vetice 8
-	auto* a27 = new Aresta(1, 7, 8);
-	auto* a28 = new Aresta(1, 8, 7);
+	auto* a28 = new Aresta(1, 7, 8);
+	auto* a29 = new Aresta(1, 8, 7);
 
 	Grafo* grafo;
 	int numV = 9;
-	int numA = 28;
-	grafo = Grafo::criarGrafo(numV, numA, { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28 });
+	int numA = 30;
+	grafo = Grafo::criarGrafo(numV, numA, { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30 });
 	vector<int> res;
 	//vector<int> res = grafo->dijkstra(origem, destino, dist);
 //	grafo->proximaArestaEValida(4, a5);
