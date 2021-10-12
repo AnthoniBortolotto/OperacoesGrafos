@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.19)
 project(OperacoesGrafos)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -10,4 +10,6 @@ add_executable(OperacoesGrafos
         Grafos/Aresta.h
         Grafos/Grafo.cpp
         Grafos/Grafo.h
-        Grafos/main.cpp)
+        Grafos/main.cpp
+        Grafos/Hungaro.cpp
+        Grafos/Hungaro.h)

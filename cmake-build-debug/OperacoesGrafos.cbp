@@ -8,96 +8,104 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Git/OperacoesGrafos/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="OperacoesGrafos">
-				<Option output="C:/Git/OperacoesGrafos/cmake-build-debug/OperacoesGrafos.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Git/OperacoesGrafos/cmake-build-debug"/>
+				<Option output="C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/OperacoesGrafos.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Git/OperacoesGrafos/Grafos"/>
+					<Add directory="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 OperacoesGrafos"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 OperacoesGrafos"/>
+					<CompileFile command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="OperacoesGrafos/fast">
-				<Option output="C:/Git/OperacoesGrafos/cmake-build-debug/OperacoesGrafos.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Git/OperacoesGrafos/cmake-build-debug"/>
+				<Option output="C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/OperacoesGrafos.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Git/OperacoesGrafos/Grafos"/>
+					<Add directory="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 OperacoesGrafos/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 OperacoesGrafos/fast"/>
+					<CompileFile command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Git/OperacoesGrafos/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Git/OperacoesGrafos/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/CODEBL~1/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Git/OperacoesGrafos/Grafos/Aresta.cpp">
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Aresta.cpp">
 			<Option target="OperacoesGrafos"/>
 		</Unit>
-		<Unit filename="C:/Git/OperacoesGrafos/Grafos/Aresta.h">
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Aresta.h">
 			<Option target="OperacoesGrafos"/>
 		</Unit>
-		<Unit filename="C:/Git/OperacoesGrafos/Grafos/Grafo.cpp">
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Grafo.cpp">
 			<Option target="OperacoesGrafos"/>
 		</Unit>
-		<Unit filename="C:/Git/OperacoesGrafos/Grafos/Grafo.h">
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Grafo.h">
 			<Option target="OperacoesGrafos"/>
 		</Unit>
-		<Unit filename="C:/Git/OperacoesGrafos/Grafos/main.cpp">
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Hungaro.cpp">
 			<Option target="OperacoesGrafos"/>
 		</Unit>
-		<Unit filename="C:/Git/OperacoesGrafos/CMakeLists.txt">
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Hungaro.h">
+			<Option target="OperacoesGrafos"/>
+		</Unit>
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/main.cpp">
+			<Option target="OperacoesGrafos"/>
+		</Unit>
+		<Unit filename="C:/Users/Evandro/Documents/Git/OperacoesGrafos/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

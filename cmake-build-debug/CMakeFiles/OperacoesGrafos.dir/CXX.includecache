@@ -6,45 +6,37 @@
 
 #IncludeRegexTransform: 
 
-C:/Git/OperacoesGrafos/Grafos/Aresta.cpp
-Aresta.h
-C:/Git/OperacoesGrafos/Grafos/Aresta.h
-
-C:/Git/OperacoesGrafos/Grafos/Aresta.h
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Aresta.h
 vector
 -
 iostream
 -
 string.h
-C:/Git/OperacoesGrafos/Grafos/string.h
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/string.h
 
-C:/Git/OperacoesGrafos/Grafos/Grafo.cpp
-Grafo.h
-C:/Git/OperacoesGrafos/Grafos/Grafo.h
-Aresta.h
-C:/Git/OperacoesGrafos/Grafos/Aresta.h
-list
--
-queue
--
-algorithm
--
-
-C:/Git/OperacoesGrafos/Grafos/Grafo.h
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Grafo.h
 vector
 -
 Aresta.h
-C:/Git/OperacoesGrafos/Grafos/Aresta.h
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Aresta.h
 string
-C:/Git/OperacoesGrafos/Grafos/string
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/string
 
-C:/Git/OperacoesGrafos/Grafos/main.cpp
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Hungaro.h
+vector
+-
+iostream
+-
+
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/main.cpp
 iostream
 -
 vector
 -
+Hungaro.h
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Hungaro.h
 Aresta.h
-C:/Git/OperacoesGrafos/Grafos/Aresta.h
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Aresta.h
 Grafo.h
-C:/Git/OperacoesGrafos/Grafos/Grafo.h
+C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Grafo.h
 

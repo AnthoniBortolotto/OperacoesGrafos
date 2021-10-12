@@ -1,26 +1,19 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Git/OperacoesGrafos/Grafos/Aresta.cpp" "C:/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir/Grafos/Aresta.cpp.obj"
-  "C:/Git/OperacoesGrafos/Grafos/Grafo.cpp" "C:/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir/Grafos/Grafo.cpp.obj"
-  "C:/Git/OperacoesGrafos/Grafos/main.cpp" "C:/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir/Grafos/main.cpp.obj"
+  "C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Aresta.cpp" "C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir/Grafos/Aresta.cpp.obj"
+  "C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Grafo.cpp" "C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir/Grafos/Grafo.cpp.obj"
+  "C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/Hungaro.cpp" "C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir/Grafos/Hungaro.cpp.obj"
+  "C:/Users/Evandro/Documents/Git/OperacoesGrafos/Grafos/main.cpp" "C:/Users/Evandro/Documents/Git/OperacoesGrafos/cmake-build-debug/CMakeFiles/OperacoesGrafos.dir/Grafos/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../Grafos"
-  )
-
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
   )
 
 # Targets to which this target links.

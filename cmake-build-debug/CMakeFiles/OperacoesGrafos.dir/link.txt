@@ -1,3 +1,3 @@
-"C:\Program Files\JetBrains\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\OperacoesGrafos.dir/objects.a
+"C:\Program Files\JetBrains\CLion 2021.1.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\OperacoesGrafos.dir/objects.a
 C:\MinGW\bin\ar.exe cr CMakeFiles\OperacoesGrafos.dir/objects.a @CMakeFiles\OperacoesGrafos.dir\objects1.rsp
 C:\MinGW\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\OperacoesGrafos.dir/objects.a -Wl,--no-whole-archive -o OperacoesGrafos.exe -Wl,--out-implib,libOperacoesGrafos.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\OperacoesGrafos.dir\linklibs.rsp

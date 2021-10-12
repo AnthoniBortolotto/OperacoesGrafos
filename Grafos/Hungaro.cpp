@@ -7,9 +7,11 @@ Hungaro::Hungaro(vector<vector<int>> matriz) {
     this->valoresOriginais = igualarLinhaColuna(matriz);
     valores = igualarLinhaColuna(clonarMatriz(matriz));
 
+    linhasMatriz.resize(valores[0].size(), 0);
+    colunasOcupadas.resize(valores[0].size(), 0);
+
+    cout << "Matriz. " << endl;
     printarMatriz(valores);
-    linhasMatriz.resize(valores[0].size(), -1);
-    colunasOcupadas.resize(valores[0].size(), -1);
 
     //Passo 1
     subtrairLinhaValorMinimo();
@@ -26,9 +28,12 @@ Hungaro::Hungaro(vector<vector<int>> matriz) {
 
     optimizar();
 
-    cout << "printando::: " << endl;
+    cout << "printando Matriz Riscos::: " << endl;
+    printarMatriz(linhas);
+    cout << "printando Matriz Valores::: " << endl;
     printarMatriz(valores);
-    cout << "TOTAL " << getTotal();
+
+    cout << "Valor Total : " << getTotal() << endl;
 }
 
 vector<vector<int>> Hungaro::clonarMatriz(vector<vector<int>> matriz) {
@@ -58,6 +63,9 @@ void Hungaro::subtrairLinhaValorMinimo() {
             valores[linha][col] -= menorValorLinha[linha];
         }
     }
+
+    cout << "Subtraindo por linha. " << endl;
+    printarMatriz(valores);
 }
 
 void Hungaro::subtrairColunaValorMinimo() {
@@ -75,7 +83,7 @@ void Hungaro::subtrairColunaValorMinimo() {
     }
 
     //Percorrendo matriz para realizar subtração do menor valor coluna.
-    for(int col = 0; col < valores[0].size(); col++)
+    for(int col = 0; col < valores.size(); col++)
     {
         for(int linha = 1; linha < valores.size(); linha++)
         {
@@ -83,6 +91,8 @@ void Hungaro::subtrairColunaValorMinimo() {
         }
     }
 
+    cout << "Subtraindo por coluna. " << endl;
+    printarMatriz(valores);
 }
 
 void Hungaro::cobrirZeros() {
@@ -90,15 +100,15 @@ void Hungaro::cobrirZeros() {
 
     //Inicializando
     linhas = valores;
+
     for(int linha=0; linha<valores.size();linha++){
-        for(int col=0; col<valores[0].size();col++){
+        for(int col=0; col<valores.size();col++){
             linhas[linha][col] = 0;
         }
     }
 
-
     for(int linha=0; linha<valores.size();linha++){
-        for(int col=0; col<valores[0].size();col++){
+        for(int col=0; col<valores.size();col++){
             if(valores[linha][col] == 0)
                 selecionarVizinhos(linha, col, maxVerticalHorizontal(linha, col));
         }
@@ -141,14 +151,15 @@ void Hungaro::selecionarVizinhos(int linha, int coluna, int maximoVerticalHorizo
     }
     // incrementando o numero de linha
     numeroLinhas++;
+
 }
 
 void Hungaro::criarZerosAdicionais() {
     int menorValorNaoRiscado = 0;
 
-    //procura o valor minimo nos numeros não descobertos
+    //procura o valor minimo nos numeros não riscados
     for(int linha=0; linha<valores.size();linha++){
-        for(int col=0; col<valores[0].size();col++){
+        for(int col=0; col<valores.size();col++){
             if(linhas[linha][col] == 0 && (valores[linha][col] < menorValorNaoRiscado || menorValorNaoRiscado == 0))
                 menorValorNaoRiscado = valores[linha][col];
         }
@@ -157,14 +168,15 @@ void Hungaro::criarZerosAdicionais() {
     // Subtrai o minimo dos valores não riscados, e então adiciona os elementos riscados duas vezes
     for(int linha=0; linha<valores.size();linha++){
         for(int col=0; col<valores[0].size();col++){
-            if(linhas[linha][col] == 0) // If uncovered, subtract
+            if(linhas[linha][col] == 0) // Se não estiver riscado, subtrai
                 valores[linha][col] -= menorValorNaoRiscado;
 
-            else if(linhas[linha][col] == 2) // If covered twice, add
+            else if(linhas[linha][col] == 2) // Se estiver riscado 2 vezes (intersecção), adiciona
                 valores[linha][col] += menorValorNaoRiscado;
         }
     }
 
+    printarMatriz(valores);
 }
 
 void Hungaro::printarMatriz(vector<vector<int>> matriz) {
@@ -196,7 +208,19 @@ vector<vector<int>> Hungaro::igualarLinhaColuna(vector<vector<int>> matriz) {
 }
 
 bool Hungaro::optimizar(int linha) {
+    if(linha == linhasMatriz.size()) // se todas linhas ja forem designadas
+        return true;
 
+    for(int col=0; col<valores.size();col++){ // Tenta todas colunas
+        if(valores[linha][col] == 0 && colunasOcupadas[col] == 0){ // Se o valor atual na coluna 'col' é zero e não está ocupada
+            linhasMatriz[linha] = col; // Atribui a linha com o valor da coluna
+            colunasOcupadas[col] = 1; // Marca a coluna como ocupada
+            if(optimizar(linha+1)) // Se as proximas linhas foram atribuidas com sucesso em uma unica coluna.
+                return true;
+            colunasOcupadas[col] = 0; // Se as proximas linhas não possuem valor, retorna e tenta as outras.
+        }
+    }
+    return false;
 }
 
 bool Hungaro::optimizar() {
@@ -207,7 +231,7 @@ int Hungaro::getTotal() {
     int total = 0;
     for(int i = 0; i < valores.size(); i++)
     {
-        cout << linhasMatriz[i] << endl;
+        total+= valoresOriginais[i][linhasMatriz[i]];
     }
 
     return total;
