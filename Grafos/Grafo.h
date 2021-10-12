@@ -55,7 +55,6 @@ public:
     vector<int> fleury(int vOrigem);
 
     void hungaro(vector<vector<int>> matriz);
-    void igualarLinhaColuna();
     int menorValorLinha(vector<vector<int>> matriz, int linha);
     int menorValorColuna(vector<vector<int>> matriz, int coluna);
 
@@ -64,6 +63,5 @@ public:
 private:
 
 
-    void vector<vector<int>>(vector<vector<int>> matriz);
 };
 
