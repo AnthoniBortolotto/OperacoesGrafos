@@ -179,38 +179,24 @@ int main()
 	while (continuar)
 	{
 		cout << "Menu - Problema do Carteiro Chines\n";
-		cout << "1 - Matriz de Custo\n";
-		cout << "2 - Matriz de Roteamento\n";
-		cout << "3 - Floyd\n";
-		cout << "4 - Dijkstra";
-		cout << "\n5 - Fleury\n";
-		cout << "6 - resolver questao 3\n";
-		cout << "7 - Sair\n";
+		cout << "1 - Floyd\n";
+		cout << "2 - Dijkstra";
+		cout << "\n3 - Fleury\n";
+		cout << "4 - resolver questao 3\n";
+		cout << "5 - Sair\n";
 		cin >> input;
 		switch (input)
 		{
 		case 1:
-            //system("clear");
-			cout << " -- Matriz de Custo --" << endl;
-			//exibirMatriz(grafo->mCusto);
-			break;
-		case 2:
-            //system("clear");
-            cout << " -- Matriz de Roteamento --" << endl;
-            //exibirMatriz(grafo->mRoteamento);
-			break;
-		case 3:
-            //system("clear");
             grafo->algoritmoFloyd();
 			break;
-		case 4:
+		case 2:
 			exibirDijkstra(grafo, grafo->dijkstra(origem, destino), origem, destino);
-            //exit(0);
-		case 5:
-            //system("clear");
+			break;
+		case 3:
 			grafo->fleury(0);
 			break;
-		case 6:
+		case 4:
 			
 			for (int i = 0; i < numV; i++) {
 				for (int j = 0; j < numV; j++)
@@ -224,7 +210,7 @@ int main()
 			
 
 			break;
-		case 7:
+		case 5:
 			continuar = false;
 			break;
 		default:
