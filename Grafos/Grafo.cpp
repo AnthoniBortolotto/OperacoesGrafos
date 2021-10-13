@@ -44,7 +44,7 @@ void Grafo::algoritmoFloyd()
 	//  Exibir dados
 	while (this->verificarMatriz(-1, tempMCusto) && k < tempMCusto.size()) {
 
-		cout << "matriz de custo: " << k << endl;
+		/*cout << "matriz de custo: " << k << endl;
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
 			for (int j = 0; j < tempMCusto[i].size(); j++)
@@ -61,7 +61,7 @@ void Grafo::algoritmoFloyd()
 				cout << tempMRoteamento[i][j] << " ";
 			}
 			cout << "\n";
-		}
+		}*/
 
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
@@ -77,7 +77,7 @@ void Grafo::algoritmoFloyd()
 		k++;
 	}
 	//precisa 2 vezes
-	cout << "matriz de custo: " << k << endl;
+	/*cout << "matriz de custo: " << k << endl;
 	for (int i = 0; i < tempMCusto.size(); i++)
 	{
 		for (int j = 0; j < tempMCusto[i].size(); j++)
@@ -94,7 +94,7 @@ void Grafo::algoritmoFloyd()
 			cout << tempMRoteamento[i][j] << " ";
 		}
 		cout << "\n";
-	}
+	}*/
 
 	this->mCusto = tempMCusto;
 	this->mRoteamento = tempMRoteamento;
@@ -234,6 +234,7 @@ vector<int> Grafo::fleury(int vOrigem)
 				res.push_back(vAtual);
 				vAtual = aVizinhas[i]->destino;
 				//deletar aresta
+				cout << aVizinhas[i]->origem << "-";
 				this->apagarAresNOrientada(aVizinhas[i]);
 				break;
 			}
@@ -241,6 +242,7 @@ vector<int> Grafo::fleury(int vOrigem)
 
 	}
 	if (res.empty()) res.push_back(vOrigem);
+	cout << vOrigem;
 	return res;
 }
 
@@ -453,6 +455,12 @@ int Grafo::numVAlcancaveis(int origem)
 	}
 	return cont;
 }
+
+bool checarMarcados(vector<int> marcados) {
+	for (auto marca : marcados) if (marca == 0) return false;
+	return true;
+}
+
 //cria as novas arestas em grafos não eulerianos
 void Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
@@ -477,60 +485,49 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 
 	auto microGrafo = this->criarMicroGrafo(vImpares, novasArestas);
 	int menor = -1;
-	int melhorOrigem = -1;
-	for (int i = 0; i < microGrafo->numV; i++)
-	{
-		int dist = 0;
-		for (int j = 0; j < microGrafo->numV; j++)
+	int melhori = -1;
+	int melhorj = -1;
+	vector<int> marcados(microGrafo->numV, 0);
+	vector<int> bons;
+	while (!checarMarcados(marcados)) {
+		for (int i = 0; i < microGrafo->numV; i++)
 		{
-			dist += microGrafo->obterDistDijkstra(microGrafo->dijkstra(i, j), i, j);
+			if (marcados[i] == 0)
+			{
+				int dist = 0;
+				for (int j = 0; j < microGrafo->numV; j++)
+				{
+					if (marcados[j] == 0 && i != j) {
+						dist = microGrafo->obterDistDijkstra(microGrafo->dijkstra(i, j), i, j);
+						if (menor == -1 || menor > dist)
+						{
+							menor = dist;
+							melhori = i;
+							melhorj = j;
+						}
+					}
+				}
+				marcados[melhori] = 1;
+				marcados[melhorj] = 1;
+				bons.push_back(melhori);
+				bons.push_back(melhorj);
+				menor = -1;
+			}
 			
 		}
-		if (menor == -1 || menor > dist) 
-		{ 
-			menor = dist;
-			melhorOrigem = i;
-		}
 	}
-	auto conjuntoArestas = this->combinarArestas(novasArestas, tamConjunto);
-	
-	//precisa somar  de duas em duas as arestas e pegar a que dá o menor valor
-	bool mesmaAresta = false;
-	this->removerDuplicatas(conjuntoArestas);
-	int res1 = 0;
-	int res2 = 0;
-	for (int i = 0; i < conjuntoArestas.size(); i++)
+	//só traduzir de volta
+	vector<Aresta*> arestasCertas;
+	for (int i = 0; i < bons.size() - 1; i = i + 2)
 	{
-		res1 = 0;
-		for (auto are : conjuntoArestas[i]) res1 += are->peso;
-
-		for (int j = 0 + i; j < conjuntoArestas.size(); j++)
-		{
-
-			for (auto aresta : conjuntoArestas[i]) { //conjunto de procura
-				if (find(conjuntoArestas[j].begin(), conjuntoArestas[j].end(), aresta) != conjuntoArestas[j].end()) mesmaAresta = true;
-			}
-			if (!mesmaAresta)
-			{
-				res2 = 0;
-				for (auto are : conjuntoArestas[j]) res1 += are->peso;
-				//fazer soma
-				int total = res1 + res2;
-				if (menor == -1 || menor > total)
-				{
-					menor = total;
-					//junta o conjunto
-					novasArestas = conjuntoArestas[i];
-					novasArestas.insert(novasArestas.end(), conjuntoArestas[j].begin(), conjuntoArestas[j].end());
-				}
-
-			}
-			mesmaAresta = false;
-
-		}
+		auto arestaAtual = microGrafo->buscarAresta(bons[i], bons[i+1]);
+		arestaAtual->origem = vImpares[arestaAtual->origem];
+		arestaAtual->destino = vImpares[arestaAtual->destino];
+		arestasCertas.push_back(arestaAtual);
+		arestasCertas.push_back(new Aresta(arestaAtual->peso, arestaAtual->destino, arestaAtual->origem)); // por que é não orientado
 	}
-	novasArestas = this->tirarOrientacao(novasArestas);
-	this->arestas.insert(this->arestas.end(), novasArestas.begin(), novasArestas.end());
+
+	this->arestas.insert(this->arestas.end(), arestasCertas.begin(), arestasCertas.end());
 }
 
 bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
