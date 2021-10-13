@@ -234,7 +234,7 @@ vector<int> Grafo::fleury(int vOrigem)
 				res.push_back(vAtual);
 				vAtual = aVizinhas[i]->destino;
 				//deletar aresta
-				cout << aVizinhas[i]->origem << "-";
+				cout << " deletando aresta e percorrendo " << aVizinhas[i]->origem +1<< "-" << aVizinhas[i]->destino+1;
 				this->apagarAresNOrientada(aVizinhas[i]);
 				break;
 			}
@@ -242,7 +242,9 @@ vector<int> Grafo::fleury(int vOrigem)
 
 	}
 	if (res.empty()) res.push_back(vOrigem);
-	cout << vOrigem;
+	cout << "caminho completo:" << endl;
+	for (auto ar : res) cout << ar+1 << "-"; //pra ficar igual o grafo
+	cout << vOrigem+1 << endl;
 	return res;
 }
 
@@ -428,6 +430,7 @@ bool Grafo::eEuleriano()
 
 bool Grafo::proximaArestaEValida(int vertice, Aresta * caminho)
 {
+	cout << "checando se caminho " << (caminho->origem) + 1 << "-" << (caminho->destino) + 1 << " e valido" << endl;
 	auto arestasVizinhas = this->arestasVizinhas(vertice);
 	//se há apenas uma direção então ela é válida
 	if (arestasVizinhas.size() == 1) return true;
@@ -440,7 +443,11 @@ bool Grafo::proximaArestaEValida(int vertice, Aresta * caminho)
 	auto numvAlcancaveisDepois = this->numVAlcancaveis(vertice);
 	this->arestas.push_back(caminho);
 	this->arestas.push_back(new Aresta(caminho->peso, caminho->destino, caminho->origem));
-	if (numvAlcancaveisAntes > numvAlcancaveisDepois) return false;
+	if (numvAlcancaveisAntes > numvAlcancaveisDepois) {
+		cout << "nao e valido" << endl;
+		return false;
+	}
+	cout << "e valido" << endl;
 	return true;
 }
 
@@ -466,10 +473,12 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
 	auto vImpares = this->vImpares(); //funciona
 	if (vImpares.size() == 0) return;
+	cout << "duplicando arestas" << endl;
 	vector<vector<int>> visitado;
 	vector<Aresta*> novasArestas;
 	int dist = 0;
-	//gera arestas entre cada numero par
+	//gera arestas entre cada vertice impar
+	cout << "gerando arestas entre cada vertice impar" << endl;
 	for (auto vImpar1 : vImpares) {
 		for (auto vImpar2 : vImpares) {
 			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) { //impede repetição de aresta
@@ -478,6 +487,7 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
 				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
 				visitado.push_back({ vImpar1, vImpar2 });
+				cout << "gerando aresta " << vImpar1+1 << "-" << vImpar2+1 << " peso: " << dist << endl;
 			}
 		}
 	}
@@ -525,6 +535,7 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 		arestaAtual->destino = vImpares[arestaAtual->destino];
 		arestasCertas.push_back(arestaAtual);
 		arestasCertas.push_back(new Aresta(arestaAtual->peso, arestaAtual->destino, arestaAtual->origem)); // por que é não orientado
+		cout << "menor aresta selecionada e criada " << (arestaAtual->origem) + 1 << "-" << (arestaAtual->destino) + 1 << " com peso: " << arestaAtual->peso << endl;
 	}
 
 	this->arestas.insert(this->arestas.end(), arestasCertas.begin(), arestasCertas.end());

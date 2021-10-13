@@ -100,45 +100,7 @@ int main()
 	auto* a8 = new Aresta(2, 4, 3);
 	auto* a9 = new Aresta(9, 4, 2);
 	auto* a10 = new Aresta(2, 4, 1);*/
-	//estudo
-	//vertice a
-	auto* a1 = new Aresta(12, 0, 1);
-	auto* a2 = new Aresta(12, 1, 0);
-
-	auto* a3 = new Aresta(5, 0, 5);
-	auto* a4 = new Aresta(5, 5, 0);
-
-	auto* a5 = new Aresta(7, 0, 6);
-	auto* a6 = new Aresta(7, 6, 0);
-
-	//vertice b
-	auto* a7 = new Aresta(7, 1, 6);
-	auto* a8 = new Aresta(7, 6, 1);
-
-	auto* a9 = new Aresta(6, 1, 2);
-	auto* a10 = new Aresta(6, 2, 1);
-
-	//vertice c
-	auto* a11 = new Aresta(5, 2, 3);
-	auto* a12 = new Aresta(5, 3, 2);
-
-
-	//vertice d
-
-	auto* a13 = new Aresta(8, 3, 6);
-	auto* a14 = new Aresta(8, 6, 3);
-
-	auto* a15 = new Aresta(11, 3, 4);
-	auto* a16 = new Aresta(11, 4, 3);
-
-	//vertice e
-	auto* a17 = new Aresta(5, 4, 5);
-	auto* a18 = new Aresta(5, 5, 4);
-
-	auto* a19 = new Aresta(6, 4, 6);
-	auto* a20 = new Aresta(6, 6, 4);
 	
-/*
 	//Atividade Carteiro Chines
 	//vertice 1
 	auto* a1 = new Aresta(2, 0, 1);
@@ -191,12 +153,12 @@ int main()
 
 	//vetice 8
 	auto* a28 = new Aresta(1, 7, 8);
-	auto* a29 = new Aresta(1, 8, 7);*/
+	auto* a29 = new Aresta(1, 8, 7);
 
 	Grafo* grafo;
-	int numV = 7;
-	int numA = 20;
-	grafo = Grafo::criarGrafo(numV, numA, { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20});
+	int numV = 9;
+	int numA = 30;
+	grafo = Grafo::criarGrafo(numV, numA, { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30});
 	vector<int> res;
 	//vector<int> res = grafo->dijkstra(origem, destino, dist);
 //	grafo->proximaArestaEValida(4, a5);
