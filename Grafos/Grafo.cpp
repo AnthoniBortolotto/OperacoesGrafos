@@ -148,6 +148,31 @@ Aresta* Grafo::retornarArestaAdjacente(int vOrigem, int vDestino) {
 	return NULL;
 }
 
+Grafo* Grafo::criarMicroGrafo(vector<int> vertices, vector<Aresta*> arestas)
+{
+	vector<Aresta*> arestasTraduzidas;
+	for (auto aresta : arestas) {
+		int src = -1;
+		int dest = -1;
+		for (int i = 0; i < vertices.size(); i++) {
+			if (aresta->destino == vertices[i]) {
+				dest = i;
+				break;
+			}
+		}
+		for (int i = 0; i < vertices.size(); i++) {
+			if (aresta->origem == vertices[i]) {
+				src = i;
+				break;
+			}
+		}
+		arestasTraduzidas.push_back(new Aresta(aresta->peso, src, dest));
+	}
+	auto microGrafo = new Grafo();
+	microGrafo = microGrafo->criarGrafo(vertices.size(), arestasTraduzidas.size(), arestasTraduzidas);
+	return microGrafo;
+}
+
 bool Grafo::verificarMatriz(int alvo, vector<vector<int>> matriz) {
 	for (int i = 0; i < matriz.size(); i++)
 	{
@@ -443,14 +468,32 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 				dist = this->obterDistDijkstra(this->dijkstra(vImpar1, vImpar2), vImpar1, vImpar2);
 				//inseria aresta não direcionada
 				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
-				//novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
+				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
 				visitado.push_back({ vImpar1, vImpar2 });
 			}
 		}
 	}
 	int tamConjunto = vImpares.size() / 2; //pra definir se vão ser feitas duplas, trios, etc... //funciona
-	auto conjuntoArestas = this->combinarArestas(novasArestas, tamConjunto);
+
+	auto microGrafo = this->criarMicroGrafo(vImpares, novasArestas);
 	int menor = -1;
+	int melhorOrigem = -1;
+	for (int i = 0; i < microGrafo->numV; i++)
+	{
+		int dist = 0;
+		for (int j = 0; j < microGrafo->numV; j++)
+		{
+			dist += microGrafo->obterDistDijkstra(microGrafo->dijkstra(i, j), i, j);
+			
+		}
+		if (menor == -1 || menor > dist) 
+		{ 
+			menor = dist;
+			melhorOrigem = i;
+		}
+	}
+	auto conjuntoArestas = this->combinarArestas(novasArestas, tamConjunto);
+	
 	//precisa somar  de duas em duas as arestas e pegar a que dá o menor valor
 	bool mesmaAresta = false;
 	this->removerDuplicatas(conjuntoArestas);

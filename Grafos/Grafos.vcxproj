@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="Aresta.cpp" />
     <ClCompile Include="Grafo.cpp" />
+    <ClCompile Include="Hungaro.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aresta.h" />
     <ClInclude Include="Grafo.h" />
+    <ClInclude Include="Hungaro.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

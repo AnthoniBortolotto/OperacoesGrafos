@@ -23,7 +23,7 @@ public:
     vector<vector<int>> matrizCusto();
     vector<vector<int>> matrizRoteamento();
     Aresta *retornarArestaAdjacente(int vOrigem, int vDestino);
-
+    Grafo* criarMicroGrafo(vector<int> vertices, vector<Aresta*> arestas);
     bool verificarMatriz(int alvo, vector<vector<int>> matriz);
 
 
