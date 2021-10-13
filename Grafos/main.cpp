@@ -38,6 +38,19 @@ void exibirDijkstra(Grafo* grafo, vector<int> djikstra, int vOrigem, int vDestin
 	cout << vDestino+1 << endl;
 }
 
+void lerFloyd(Grafo* grafo, int origem, int destino) {
+	int dist = grafo->mCusto[origem][destino];
+	int i = origem;
+	cout << "a rota de custo minimo entre o vertice " << origem + 1 << " e o vertice " << destino + 1 << " e:\n";
+	while (i != destino)
+	{
+		cout << i + 1 << "-";
+		i = grafo->mRoteamento[i][destino];
+	}
+	cout << i + 1;
+	cout << "\nseu custo e: " << dist << endl;
+}
+
 int main()
 {
 	/*auto* a1 = new Aresta(5, 0, 1);
@@ -79,6 +92,20 @@ int main()
 
 	auto* a15 = new Aresta(1, 1, 4);
 	auto* a16 = new Aresta(1, 4, 1);*/
+	//questão 1
+	//vertice 1
+	auto* a1 = new Aresta(2, 0, 1);
+	auto* a2 = new Aresta(4, 0, 2);
+	//vertice 2
+	auto* a3 = new Aresta(1, 1, 0);
+	auto* a4 = new Aresta(1, 1, 2);
+
+	//vertice 3
+	auto* a5 = new Aresta(5, 2, 3);
+	//vertice 4
+	auto* a6 = new Aresta(8, 3, 2);
+	auto* a7 = new Aresta(3, 3, 0);
+	auto* a8 = new Aresta(4, 3, 1);
 
 	//questão 3
 	int input  = 0;
@@ -103,7 +130,7 @@ int main()
 	
 	//Atividade Carteiro Chines
 	//vertice 1
-	auto* a1 = new Aresta(2, 0, 1);
+	/*auto* a1 = new Aresta(2, 0, 1);
 	auto* a2 = new Aresta(2, 1, 0);
 
 	auto* a3 = new Aresta(2, 0, 4);
@@ -154,11 +181,11 @@ int main()
 	//vetice 8
 	auto* a28 = new Aresta(1, 7, 8);
 	auto* a29 = new Aresta(1, 8, 7);
-
+	*/
 	Grafo* grafo;
-	int numV = 9;
-	int numA = 30;
-	grafo = Grafo::criarGrafo(numV, numA, { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30});
+	int numV = 4;
+	int numA = 8;
+	grafo = Grafo::criarGrafo(numV, numA, { a1, a2, a3, a4, a5, a6, a7, a8});
 	vector<int> res;
 	//vector<int> res = grafo->dijkstra(origem, destino, dist);
 //	grafo->proximaArestaEValida(4, a5);
@@ -192,6 +219,8 @@ int main()
 		{
 		case 1:
             grafo->algoritmoFloyd();
+			lerFloyd(grafo, 0, 3);
+			lerFloyd(grafo, 2, 1);
 			break;
 		case 2:
 			exibirDijkstra(grafo, grafo->dijkstra(origem, destino), origem, destino);

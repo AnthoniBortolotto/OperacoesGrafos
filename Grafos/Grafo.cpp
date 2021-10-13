@@ -44,7 +44,7 @@ void Grafo::algoritmoFloyd()
 	//  Exibir dados
 	while (this->verificarMatriz(-1, tempMCusto) && k < tempMCusto.size()) {
 
-		/*cout << "matriz de custo: " << k << endl;
+		cout << "matriz de custo: " << k << endl;
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
 			for (int j = 0; j < tempMCusto[i].size(); j++)
@@ -61,7 +61,7 @@ void Grafo::algoritmoFloyd()
 				cout << tempMRoteamento[i][j] << " ";
 			}
 			cout << "\n";
-		}*/
+		}
 
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
@@ -77,7 +77,7 @@ void Grafo::algoritmoFloyd()
 		k++;
 	}
 	//precisa 2 vezes
-	/*cout << "matriz de custo: " << k << endl;
+	cout << "matriz de custo: " << k << endl;
 	for (int i = 0; i < tempMCusto.size(); i++)
 	{
 		for (int j = 0; j < tempMCusto[i].size(); j++)
@@ -91,10 +91,10 @@ void Grafo::algoritmoFloyd()
 	{
 		for (int j = 0; j < tempMRoteamento[i].size(); j++)
 		{
-			cout << tempMRoteamento[i][j] << " ";
+			cout << tempMRoteamento[i][j] + 1 << " ";
 		}
 		cout << "\n";
-	}*/
+	}
 
 	this->mCusto = tempMCusto;
 	this->mRoteamento = tempMRoteamento;
