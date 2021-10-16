@@ -29,7 +29,7 @@ public:
 
     //Dijsktra
     int menorDistancia(vector<int> dist, vector<int> visitados);
-    vector<int> dijkstra(int vOrigem, int vDestino, int &distTotal);
+    vector<int> dijkstra(int vOrigem);
     vector<int> fleury(int vOrigem);
     bool procurar(vector<int> visitados, int valor);
     vector<int> DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino);
