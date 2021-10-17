@@ -10,8 +10,7 @@
 using namespace std;
 Grafo::Grafo()
 {
-	this->numA = 0;
-	this->numV = 0;
+    this->numV = 0;
 }
 
 Grafo::~Grafo()
@@ -22,9 +21,8 @@ Grafo* Grafo::criarGrafo(int vertices, int arestas, const vector<Aresta*>&novasA
 	auto* grafo = new Grafo();
 
 	grafo->numV = vertices;
-	grafo->numA = arestas;
 
-	grafo->arestas = novasArestas;
+    grafo->arestas = novasArestas;
 
 	for (int i = 0; i < grafo->numV; i++)
 	{
@@ -43,26 +41,6 @@ void Grafo::algoritmoFloyd()
 	int k = 0;
 	//  Exibir dados
 	while (this->verificarMatriz(-1, tempMCusto) && k < tempMCusto.size()) {
-
-		/*cout << "matriz de custo: " << k << endl;
-		for (int i = 0; i < tempMCusto.size(); i++)
-		{
-			for (int j = 0; j < tempMCusto[i].size(); j++)
-			{
-				cout << tempMCusto[i][j] << " ";
-			}
-			cout << "\n";
-		}
-		cout << "\nmatriz de roteamento: " << k << "\n";
-		for (int i = 0; i < tempMRoteamento.size(); i++)
-		{
-			for (int j = 0; j < tempMRoteamento[i].size(); j++)
-			{
-				cout << tempMRoteamento[i][j] << " ";
-			}
-			cout << "\n";
-		}*/
-
 		for (int i = 0; i < tempMCusto.size(); i++)
 		{
 			for (int j = 0; j < tempMCusto[i].size(); j++)
@@ -76,28 +54,7 @@ void Grafo::algoritmoFloyd()
 
 		k++;
 	}
-	//precisa 2 vezes
-	/*cout << "matriz de custo: " << k << endl;
-	for (int i = 0; i < tempMCusto.size(); i++)
-	{
-		for (int j = 0; j < tempMCusto[i].size(); j++)
-		{
-			cout << tempMCusto[i][j] << " ";
-		}
-		cout << "\n";
-	}
-	cout << "\nmatriz de roteamento: " << k << "\n";
-	for (int i = 0; i < tempMRoteamento.size(); i++)
-	{
-		for (int j = 0; j < tempMRoteamento[i].size(); j++)
-		{
-			cout << tempMRoteamento[i][j] << " ";
-		}
-		cout << "\n";
-	}*/
-
 	this->mCusto = tempMCusto;
-	this->mRoteamento = tempMRoteamento;
 }
 
 vector<vector<int>> Grafo::matrizCusto()
@@ -234,7 +191,7 @@ vector<int> Grafo::fleury(int vOrigem)
 				res.push_back(vAtual);
 				vAtual = aVizinhas[i]->destino;
 				//deletar aresta
-				cout << " deletando aresta e percorrendo " << aVizinhas[i]->origem +1<< "-" << aVizinhas[i]->destino+1;
+				cout << "deletando aresta e percorrendo " << aVizinhas[i]->origem +1<< "-" << aVizinhas[i]->destino+1 << " ";
 				this->apagarAresNOrientada(aVizinhas[i]);
 				break;
 			}
@@ -260,15 +217,6 @@ int Grafo::menorDistancia(vector<int> dist, vector<int> visitados)
 }
 
 
-
-bool Grafo::procurar(vector<int> visitados, int valor) {
-
-	for (int i = 0; i < visitados.size(); i++)
-	{
-		if (visitados[i] == valor) return true;
-	}
-	return false;
-}
 //retorna um array com a ordem dos vertices
 vector<int> Grafo::DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino)
 {
@@ -313,15 +261,6 @@ Aresta* Grafo::buscarAresta(int vOrigem, int vDestino)
 	return NULL;
 }
 
-Aresta* Grafo::buscarArestaNOrientada(int vOrigem, int vDestino, vector<vector<Aresta*>> arestas)
-{
-	for (auto arestaDupla : arestas) {
-		if (arestaDupla[0]->origem == vOrigem && arestaDupla[1]->destino == vDestino) return arestaDupla[0];
-		if (arestaDupla[0]->origem == vDestino && arestaDupla[1]->destino == vOrigem) return arestaDupla[0];
-	}
-	return NULL;
-}
-
 
 vector<Aresta*> Grafo::arestasVizinhas(int vertice) {
 	vector<Aresta*> vizinhos;
@@ -332,22 +271,6 @@ vector<Aresta*> Grafo::arestasVizinhas(int vertice) {
 	return vizinhos;
 }
 
-vector<int> Grafo::verticesVizinhos(int vertice)
-{
-	auto aVizinhas = this->arestasVizinhas(vertice);
-	vector<int> vVizinhos;
-	bool adicionar;
-	for (int i = 0; i < aVizinhas.size(); i++)
-	{
-		adicionar = true;
-		for (int j = 0; j < vVizinhos.size(); j++)
-		{
-			if (vVizinhos[j] == aVizinhas[i]->destino) adicionar = false;
-		}
-		if (adicionar) vVizinhos.push_back(aVizinhas[i]->destino);
-	}
-	return vVizinhos;
-}
 //retorna os vértices impares
 vector<int> Grafo::vImpares() // testado
 {
@@ -357,50 +280,6 @@ vector<int> Grafo::vImpares() // testado
 		if (this->arestasVizinhas(vertice).size() % 2 != 0) vI.push_back(vertice);
 	}
 	return vI;
-}
-
-int Grafo::somarDistDeArestas(vector<Aresta*> arestas)
-{
-	int acumulador = 0;
-	for (auto aresta : arestas) acumulador += aresta->peso;
-	return acumulador;
-}
-
-vector<vector<Aresta*>> Grafo::removerDuplicatas(vector<vector<Aresta*>> conjunto)
-{
-	int igualdadesMaximas = conjunto[0].size();
-	int igualdadesObtidas = 0;
-	vector<vector<Aresta*>> conjuntoLimpo;
-	vector<int> marcados;
-	for (int i = 0; i < conjunto.size(); i++) {
-		if (marcados.empty() || find(marcados.begin(), marcados.end(), i) == marcados.end()) {
-			for (int j = 0 + i; j < conjunto.size(); j++)
-			{
-				for (auto aresta : conjunto[j]) { //conjunto de procura
-					for (int n = 0; n < igualdadesMaximas; n++) {
-						if (aresta == conjunto[i][n]) igualdadesObtidas++; //se uma aresta encontra outra igual em outra posição ela adiciona igualdadesObtidas
-					}
-				}
-				if (igualdadesObtidas == igualdadesMaximas) marcados.push_back(j); //marca lugares que foram removidos 
-				igualdadesObtidas = 0;
-			}
-		}
-	}
-	for (int i = 0; i < conjunto.size(); i++) {
-		if (find(marcados.begin(), marcados.end(), i) == marcados.end()) conjuntoLimpo.push_back(conjunto[i]); //checa se i não está marcado
-	}
-	return conjuntoLimpo;
-}
-
-vector<Aresta*> Grafo::tirarOrientacao(vector<Aresta*> arestas)
-{
-	auto temp = arestas;
-	for (int i = 0; i < arestas.size(); i++)
-	{
-		//if(this->buscarAresta(temp[i]->destino, temp[i]->origem) == NULL || this->buscarAresta(temp[i]->destino, temp[i]->origem)->peso != temp[i]->peso)
-		temp.push_back(new Aresta(temp[i]->peso, temp[i]->destino, temp[i]->origem));
-	}
-	return temp;
 }
 
 void Grafo::apagarAresNOrientada(Aresta * aresta)
@@ -416,21 +295,9 @@ void Grafo::apagarAresNOrientada(Aresta * aresta)
 	this->arestas.erase(std::remove(this->arestas.begin(), this->arestas.end(), aresta), this->arestas.end());
 }
 
-bool Grafo::eEuleriano()
-{
-	int numVerticesImpares = 0;
-	int numArestas;
-	for (int i = 0; i < this->numV; i++) {
-		numArestas = this->arestasVizinhas(i).size();
-		if (numArestas % 2 != 0) numVerticesImpares++;
-	}
-	if (numVerticesImpares == 0 || numVerticesImpares == 2) return true;
-	return false;
-}
-
 bool Grafo::proximaArestaEValida(int vertice, Aresta * caminho)
 {
-	cout << "checando se caminho " << (caminho->origem) + 1 << "-" << (caminho->destino) + 1 << " e valido" << endl;
+	cout << "checando se caminho " << (caminho->origem) + 1 << "-" << (caminho->destino) + 1 << " eh valido" << endl;
 	auto arestasVizinhas = this->arestasVizinhas(vertice);
 	//se há apenas uma direção então ela é válida
 	if (arestasVizinhas.size() == 1) return true;
@@ -444,10 +311,10 @@ bool Grafo::proximaArestaEValida(int vertice, Aresta * caminho)
 	this->arestas.push_back(caminho);
 	this->arestas.push_back(new Aresta(caminho->peso, caminho->destino, caminho->origem));
 	if (numvAlcancaveisAntes > numvAlcancaveisDepois) {
-		cout << "nao e valido" << endl;
+		cout << "nao eh valido" << endl;
 		return false;
 	}
-	cout << "e valido" << endl;
+	cout << "eh valido" << endl;
 	return true;
 }
 
@@ -550,96 +417,4 @@ bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
 		if (dupla1 == visitado || dupla2 == visitado) return true;
 	}
 	return false;
-}
-
-
-//Combina todas as arestas
-vector<vector<Aresta*>> Grafo::combinarArestas(vector<Aresta*> Conjunto, int tam) {
-
-	vector<vector<Aresta*>> subConjunto;
-
-	for (int i = 0; i < Conjunto.size(); i++)
-	{
-		vector<vector<Aresta*>> temp = subConjunto;
-		for (int n = 0; n < tam; n++) { //necessário e funcionando?
-			vector<Aresta*> res = { Conjunto[i] };
-			for (int j = 1 + i; (tam != res.size() && j < Conjunto.size()); j++)
-			{
-				res.push_back(Conjunto[j]);
-			}
-			if(res.size() == tam) subConjunto.push_back(res);
-		}
-
-	}
-	//isso gera todos os conjuntos possíveis de array incluindo duplicatas
-
-	//subConjunto = this->removerDuplicatas(subConjunto); //remove duplicatas
-
-	return subConjunto;
-}
-
-void Grafo::hungaro(vector<vector<int>> matriz) {
-	this->igualarLinhaColuna(matriz);
-	//gerar matriz custo
-
-	for (int i = 0; i < matriz.size(); i++) //subtraiu menor linha
-	{
-		int menorValorLinha = this->menorValorLinha(matriz, i);
-		for (int j = 0; j < matriz[i].size(); j++)
-		{
-			matriz[i][j] -= menorValorLinha;
-		}
-	}
-
-	for (int i = 0; i < matriz.size(); i++) //subtraiu menor coluna
-	{
-		
-		for (int j = 0; j < matriz[i].size(); j++)
-		{
-			int menorValorColuna = this->menorValorColuna(matriz, j);
-			matriz[i][j] -= menorValorColuna;
-		}
-	}
-
-}
-
-int Grafo::menorValorLinha(vector<vector<int>> matriz, int linha) {
-	int menor = -1;
-	for (int i = 0; i < matriz.size(); i++)
-	{
-		for (int j = 0; j < matriz[i].size(); j++)
-		{
-			if (menor == -1 || matriz[linha][j] < menor)
-				menor = matriz[linha][j];
-		}
-	}
-	return menor;
-}
-
-int Grafo::menorValorColuna(vector<vector<int>> matriz, int coluna) {
-	int menor = -1;
-	for (int i = 0; i < matriz.size(); ++i) {
-		if (menor == -1 || matriz[i][coluna] < menor)
-			menor = matriz[i][coluna];
-	}
-	return menor;
-}
-
-
-vector<vector<int>> Grafo::igualarLinhaColuna(vector<vector<int>> matriz) {
-	if (matriz[0].size() == matriz.size()) return matriz;
-	else if (matriz[0].size() > matriz.size()) {
-		for (int i = 0; i < matriz.size(); ++i) {
-			matriz[i].push_back(0);
-		}
-	}
-	else
-	{
-		vector<int> coluna;
-		for (int i = 0; i < matriz.size(); i++) {
-			coluna.push_back(0);
-		}
-		matriz.push_back(coluna);
-	}
-	return matriz;
 }
