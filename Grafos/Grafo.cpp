@@ -354,12 +354,10 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
 				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
 				visitado.push_back({ vImpar1, vImpar2 });
-				cout << "gerando aresta " << vImpar1+1 << "-" << vImpar2+1 << " peso: " << dist << endl;
+				cout << "gerando aresta " << vImpar1 + 1 << "-" << vImpar2 + 1 << " peso: " << dist << endl;
 			}
 		}
 	}
-	int tamConjunto = vImpares.size() / 2; //pra definir se vão ser feitas duplas, trios, etc... //funciona
-
 	auto microGrafo = this->criarMicroGrafo(vImpares, novasArestas);
 	int menor = -1;
 	int melhori = -1;
@@ -371,7 +369,7 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 		{
 			if (marcados[i] == 0)
 			{
-				int dist = 0;
+				dist = 0;
 				for (int j = 0; j < microGrafo->numV; j++)
 				{
 					if (marcados[j] == 0 && i != j) {
@@ -387,27 +385,27 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 				marcados[melhori] = 1;
 				marcados[melhorj] = 1;
 				bons.push_back(melhori);
-				bons.push_back(melhorj);
+				bons.push_back(melhorj); //aloca pares de melhores vertices
 				menor = -1;
 			}
-			
+
 		}
 	}
 	//só traduzir de volta
 	vector<Aresta*> arestasCertas;
-	for (int i = 0; i < bons.size() - 1; i = i + 2)
+	for (int i = 0; i < bons.size() - 1; i = i + 2) // itera de 2 em 2
 	{
-		auto arestaAtual = microGrafo->buscarAresta(bons[i], bons[i+1]);
+		auto arestaAtual = microGrafo->buscarAresta(bons[i], bons[i + 1]);
 		arestaAtual->origem = vImpares[arestaAtual->origem];
 		arestaAtual->destino = vImpares[arestaAtual->destino];
 		arestasCertas.push_back(arestaAtual);
 		arestasCertas.push_back(new Aresta(arestaAtual->peso, arestaAtual->destino, arestaAtual->origem)); // por que é não orientado
 		cout << "menor aresta selecionada e criada " << (arestaAtual->origem) + 1 << "-" << (arestaAtual->destino) + 1 << " com peso: " << arestaAtual->peso << endl;
 	}
+	//insere de fato as melhores arestas no grafo
 
 	this->arestas.insert(this->arestas.end(), arestasCertas.begin(), arestasCertas.end());
 }
-
 bool Grafo::verificarVisita(vector<vector<int>> visitados, int v1, int v2)
 {
 	if (visitados.empty()) return false;
