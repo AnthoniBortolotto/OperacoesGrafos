@@ -141,7 +141,7 @@ bool Grafo::verificarMatriz(int alvo, vector<vector<int>> matriz) {
 	return false;
 }
 
-vector<int> Grafo::dijkstra(int vOrigem, int vDestino)
+vector<int> Grafo::dijkstra(int vOrigem)
 {
 	int menor = -1;
 	//Ant é a ordem em que os vértices são visitados
@@ -338,18 +338,18 @@ bool checarMarcados(vector<int> marcados) {
 //cria as novas arestas em grafos não eulerianos
 void Grafo::duplicarArestas(int origem) //apenas não direcionado
 {
-	auto vImpares = this->vImpares(); //funciona
+	auto vImpares = this->vImpares();
 	if (vImpares.size() == 0) return;
 	cout << "duplicando arestas" << endl;
-	vector<vector<int>> visitado;
+	vector<vector<int>> visitado; //recebe os pares de vértices que foram visitados
 	vector<Aresta*> novasArestas;
 	int dist = 0;
 	//gera arestas entre cada vertice impar
 	cout << "gerando arestas entre cada vertice impar" << endl;
 	for (auto vImpar1 : vImpares) {
 		for (auto vImpar2 : vImpares) {
-			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) { //impede repetição de aresta
-				dist = this->obterDistDijkstra(this->dijkstra(vImpar1, vImpar2), vImpar1, vImpar2);
+			if (vImpar1 != vImpar2 && !verificarVisita(visitado, vImpar1, vImpar2)) { //impede repetição de aresta por não ser orientado
+				dist = this->obterDistDijkstra(this->dijkstra(vImpar1), vImpar1, vImpar2);
 				//inseria aresta não direcionada
 				novasArestas.push_back(new Aresta(dist, vImpar1, vImpar2));
 				novasArestas.push_back(new Aresta(dist, vImpar2, vImpar1));
@@ -375,7 +375,7 @@ void Grafo::duplicarArestas(int origem) //apenas não direcionado
 				for (int j = 0; j < microGrafo->numV; j++)
 				{
 					if (marcados[j] == 0 && i != j) {
-						dist = microGrafo->obterDistDijkstra(microGrafo->dijkstra(i, j), i, j);
+						dist = microGrafo->obterDistDijkstra(microGrafo->dijkstra(i), i, j);
 						if (menor == -1 || menor > dist)
 						{
 							menor = dist;

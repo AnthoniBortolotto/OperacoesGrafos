@@ -30,7 +30,7 @@ private:
 
     //Dijsktra
     int menorDistancia(vector<int> dist, vector<int> visitados);
-    vector<int> dijkstra(int vOrigem, int vDestino);
+    vector<int> dijkstra(int vOrigem);
 
     vector<int> DjikstraTraduzido(vector<int> djikstra, int vOrigem, int vDestino);
     int obterDistDijkstra(vector<int> djikstra, int vOrigem, int vDestino);
