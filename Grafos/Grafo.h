@@ -9,7 +9,7 @@ class Grafo
 public:
 
     vector<int> fleury(int vOrigem);
-    static Grafo *criarGrafo(int vertices, int arestas, const vector<Aresta *> &novasArestas);
+    static Grafo *criarGrafo(int vertices, const vector<Aresta *> &novasArestas);
 
 private:
     vector<Aresta *> arestas;

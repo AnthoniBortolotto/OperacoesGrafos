@@ -16,7 +16,7 @@ Grafo::Grafo()
 Grafo::~Grafo()
 = default;
 
-Grafo* Grafo::criarGrafo(int vertices, int arestas, const vector<Aresta*>&novasArestas)
+Grafo* Grafo::criarGrafo(int vertices, const vector<Aresta*>&novasArestas)
 {
 	auto* grafo = new Grafo();
 
@@ -126,7 +126,7 @@ Grafo* Grafo::criarMicroGrafo(vector<int> vertices, vector<Aresta*> arestas)
 		arestasTraduzidas.push_back(new Aresta(aresta->peso, src, dest));
 	}
 	auto microGrafo = new Grafo();
-	microGrafo = microGrafo->criarGrafo(vertices.size(), arestasTraduzidas.size(), arestasTraduzidas);
+	microGrafo = microGrafo->criarGrafo(vertices.size(), arestasTraduzidas);
 	return microGrafo;
 }
 

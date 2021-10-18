@@ -1,7 +1,2 @@
-﻿  Grafo.cpp
-D:\C\Grafos\Grafos\Grafo.cpp(172,98): warning C4267: 'argumento': conversão de 'size_t' para 'int', possível perda de dados
-D:\C\Grafos\Grafos\Grafo.cpp(287,2): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-D:\C\Grafos\Grafos\Grafo.cpp(371,44): warning C4267: 'inicializando': conversão de 'size_t' para 'int', possível perda de dados
-D:\C\Grafos\Grafos\Grafo.cpp(424,47): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-D:\C\Grafos\Grafos\Grafo.cpp(494,39): warning C4267: 'inicializando': conversão de 'size_t' para 'int', possível perda de dados
-  Grafos.vcxproj -> D:\C\Grafos\x64\Debug\Grafos.exe
+﻿  main.cpp
+  Grafos.vcxproj -> C:\Users\antho\OneDrive\Área de Trabalho\Aula\Grafos\fleury\OperacoesGrafos\x64\Debug\Grafos.exe
